@@ -5,23 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerEx
 {
-    public IScene currentScene { get; private set; }
-    public void setCurrentScene(IScene scene)=> currentScene = scene; 
+    public IScene GetCurrentScene { get; private set; }
+    public void SetCurrentScene(IScene scene)=> GetCurrentScene = scene; 
      
     public void LoadScene(Define.Scene changeScene)
     {
-        currentScene.SceneLoad(() =>
+        GetCurrentScene.SceneLoad(() =>
         {
             //managerClear랑 Destory가 필요한지는 좀 더 분석 후 넣겠음
-            SceneManager.LoadScene(GetSceneName(changeScene));
+            SceneManager.LoadScene(convertSceneName(changeScene));
         });
     }
 
     
-    private string GetSceneName(Define.Scene type)
+    private string convertSceneName(Define.Scene type)
     {
-        string name = System.Enum.GetName(typeof(Define.Scene), type);
-        return name;
+        return System.Enum.GetName(typeof(Define.Scene), type);
     }
 
 

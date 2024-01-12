@@ -11,6 +11,7 @@ public class Managers : Singleton<Managers>
     {
         get { return Instance?._uiManager; }
     }
+    
     //GAME Manager 
     // 캐릭터 인벤토리를 메모리 형태로 관리
     private GameManager _gameManager = new GameManager();
@@ -28,6 +29,11 @@ public class Managers : Singleton<Managers>
     // Sound Manager
 
     // Scene Manager
+    private SceneManagerEx _sceneManager = new SceneManagerEx();
+    public static SceneManagerEx Scene
+    {
+        get { return Instance?._sceneManager; }
+    }
 
     // Data 처리 방식에 따라 구조가 달라짐. ( 빠른 시일내로 정하기로 )
 
