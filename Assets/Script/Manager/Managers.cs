@@ -5,7 +5,12 @@ public class Managers : Singleton<Managers>
     
     // UI Manager 
     // UI는 기본적으로 Component 구조를 따르되, 
-    
+    private UIManager _uiManager = new UIManager();
+
+    public static UIManager UI
+    {
+        get { return Instance?._uiManager; }
+    }
     //GAME Manager 
     // 캐릭터 인벤토리를 메모리 형태로 관리
     private GameManager _gameManager = new GameManager();
