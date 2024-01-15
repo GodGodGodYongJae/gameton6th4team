@@ -7,7 +7,7 @@ public class UI_Title : UI_Scene
     enum GameObjects
     {
         Title,
-        LoadingSlider,
+      //  LoadingSlider,
     }
 
     enum Buttons
