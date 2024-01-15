@@ -11,6 +11,7 @@ public class UI_TitleAnimation : MonoBehaviour
     // Start is called before the first frame update
     //public Ease ease; // 인스펙터에서 설정
     //transform.DOMoveY(targetX, 3).SetEase(ease);
+    //Jira Push Test
     void Start()
     {
         var rectTransform = this.GetComponent<RectTransform>();
