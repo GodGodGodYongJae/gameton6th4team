@@ -1,6 +1,10 @@
 ﻿
-public class TitleScene : UI_Scene
+using System;
+
+public class TitleScene : BaseScene
 {
-    bool isPreload = false;
-    
+    protected override UI_Scene createUIScene()
+    {
+        return Utils.GetOrAddComponent<UI_Title>(this.gameObject);
+    }
 }

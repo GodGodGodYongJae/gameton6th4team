@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Utils
+public static class Utils
 {
     public static T ParseEnum<T>(string value, bool ignoreCase = true)
     {
@@ -14,6 +15,10 @@ public class Utils
         if (component == null)
             component = go.AddComponent<T>();
         return component;
+    }
+    public static void BindEvent(this GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.UIEvent type = Define.UIEvent.Click)
+    {
+        UI_Base.BindEvent(go, action, dragAction, type);
     }
 
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false,
