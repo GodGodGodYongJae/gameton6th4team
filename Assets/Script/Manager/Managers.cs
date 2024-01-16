@@ -1,4 +1,6 @@
 ﻿
+using Script.Manager.Core;
+
 public class Managers : Singleton<Managers>
 {
     // TODO : 필요한 메니저 클래스 정의.
@@ -36,10 +38,19 @@ public class Managers : Singleton<Managers>
     }
 
     // Data 처리 방식에 따라 구조가 달라짐. ( 빠른 시일내로 정하기로 )
+    private DataManager _dataManager = new DataManager();
 
+    public static DataManager Data
+    {
+        get { return Instance?._dataManager; }
+    }
 
     // TODO : GPGS 연결 이후 ADMOB Manager 
 
+    protected void Start()
+    {
+        // Data.Init();
+    }
 }        
 
 
