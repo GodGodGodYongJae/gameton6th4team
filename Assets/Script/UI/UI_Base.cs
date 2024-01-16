@@ -74,27 +74,27 @@ public abstract class UI_Base : MonoBehaviour
     protected Slider GetSlider(int idx) { return Get<Slider>(idx); }
 
 
-    public static void BindEvent(GameObject go, Action action = null, Action<BaseEventData> dragAction = null, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindEvent(GameObject go, Action triggerAction = null, Action<BaseEventData> dragAction = null, Define.UIEvent type = Define.UIEvent.Click)
     {
         UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
         // 이벤트가 더 추가 될 것 같지 않아서 그대로 써도 괜찮을 것 같음 다만, 계속해서 뭔가 더 추가 될 가능성이 보이면 switch 문 자체를 리팩토링 해야할 것 같긴 함.
         switch (type)
         {
             case Define.UIEvent.Click:
-                evt.OnClickHandler -= action;
-                evt.OnClickHandler += action;
+                evt.OnClickHandler -= triggerAction;
+                evt.OnClickHandler += triggerAction;
                 break;
             case Define.UIEvent.Preseed:
-                evt.OnPressedHandler -= action;
-                evt.OnPressedHandler += action;
+                evt.OnPressedHandler -= triggerAction;
+                evt.OnPressedHandler += triggerAction;
                 break;
             case Define.UIEvent.PointerDown:
-                evt.OnPointerDownHandler -= action;
-                evt.OnPointerDownHandler += action;
+                evt.OnPointerDownHandler -= triggerAction;
+                evt.OnPointerDownHandler += triggerAction;
                 break;
             case Define.UIEvent.PointerUp:
-                evt.OnPointerUpHandler -= action;
-                evt.OnPointerUpHandler += action;
+                evt.OnPointerUpHandler -= triggerAction;
+                evt.OnPointerUpHandler += triggerAction;
                 break;
             case Define.UIEvent.Drag:
                 evt.OnDragHandler -= dragAction;

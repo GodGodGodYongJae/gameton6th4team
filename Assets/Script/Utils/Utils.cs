@@ -53,4 +53,8 @@ public static class Utils
             return transform.gameObject;
         return null;
     }
+   public static bool InRange(int value, int minValue, int maxValue)
+    {
+        return value >= minValue && value <= maxValue;
+    }
 }

@@ -1,6 +1,8 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using Script.Manager.Contents;
+using UnityEngine;
 
 public class GameManager
 {
@@ -26,5 +28,29 @@ public class GameManager
     }
 
     #endregion
- 
+
+    #region Day
+
+    public int CurrentDay { get; private set; }
+    
+
+    #endregion
+
+    #region Note
+
+    private Note _note;
+
+    public Note Note
+    {
+        get => _note;
+        set => _note = value;
+    }
+
+    //TODO NOTE System
+    public void ShowNotePage(int pageNum)
+    {
+        
+    }
+
+    #endregion
 }
