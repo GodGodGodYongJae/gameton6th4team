@@ -28,6 +28,7 @@ public class UI_TestScene :UI_Scene
                 Managers.Resource.Load<GameObject>("Note", (success) =>
                 {
                     Managers.Game.Note = Object.Instantiate(success, this.transform).GetComponent<Note>();
+                    Managers.Data.Init();
                 });
             }
             
