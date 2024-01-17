@@ -49,7 +49,7 @@ public class GameManager
     //TODO NOTE System
     public void ShowNotePage(int pageNum)
     {
-        
+        //TODO : 해당 페이지 넘버를 DataManager를 통해 불러온뒤 오브젝트를 만들어준다. 이후 ...
     }
 
     #endregion
