@@ -1,0 +1,20 @@
+{
+  "TriggerDatas": [
+    {
+      "id": 1,
+      "ConditionList": [
+        {
+          "type": "DayConditionData",
+          "starttDay": 1,
+          "endDay": 2
+        },
+        {
+          "type": "FlagConditionData",
+          "name": "test",
+          "flag": 1
+        }
+      ]
+
+    }
+  ]
+}
