@@ -4,14 +4,37 @@
       "id": 1,
       "ConditionList": [
         {
-          "type": "DayConditionData",
+          "type": "DayCondition",
           "starttDay": 1,
           "endDay": 2
         },
         {
-          "type": "FlagConditionData",
+          "type": "FlagCondition",
           "name": "test",
           "flag": 1
+        }
+      ],
+      "ActionList": [
+        {
+          "type": "ShowTextAction",
+          "textNumber": 10
+        }
+      ]
+
+    }
+    ,
+    {
+      "id": 2,
+      "ConditionList": [
+        {
+          "type": "DayCondition",
+          "starttDay": 10,
+          "endDay": 20
+        },
+        {
+          "type": "FlagCondition",
+          "name": "test",
+          "flag": 2
         }
       ]
 

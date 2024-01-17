@@ -1,14 +1,13 @@
 ﻿
 using System;
+using UnityEngine;
 
 public class ShowTextAction : TriggerAction
 {
-    private int? _textNumber;
+    public int textNumber;
     public override void RunAction()
     {
-        if(_textNumber == null)
-            throw new Exception("Not Found TextNumber");
-        
-        Managers.Game.ShowNotePage((int)_textNumber);
+        Debug.Log("ShowTextAction" + textNumber);
+        Managers.Game.ShowNotePage(textNumber);
     }
 }

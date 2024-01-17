@@ -22,6 +22,18 @@ namespace Script.Manager.Core
         {
             TextDatas = LoadJson<TextDataLoader, int, TextData>("textData").MakeDict();
             TriggerDatas = LoadJson<TriggerDataLoader, int, TriggerData>("triggerData").MakeDict();
+            foreach (var T in TriggerDatas)
+            {
+                foreach (var VARIABLE in T.Value.ConditionList)
+                {
+                    VARIABLE.CheckCondition();
+                }
+
+                foreach (var VARIABLE in T.Value.ActionList)
+                {
+                    VARIABLE.RunAction();
+                }
+            }
             int a = 3;
         }
         Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

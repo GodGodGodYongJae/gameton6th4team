@@ -29,44 +29,30 @@ namespace Script.Data
     #endregion
 
     #region Trigger
+
     [Serializable]
     public class TriggerData
     {
         public int id;
-        [JsonProperty("ConditionList")]
-        public List<JObject> ConditionListRaw;
+        [JsonProperty("ConditionList")] public List<JObject> ConditionListRaw;
 
-        [JsonIgnore]
-        public List<ConditionData> ConditionList { get; private set; }
+        [JsonProperty("ActionList")] public List<JObject> ActionListRaw;
+
+        [JsonIgnore] public List<Condition> ConditionList { get; private set; }
+
+        [JsonIgnore] public List<TriggerAction> ActionList { get; private set; }
 
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context)
         {
             // ConditionListRaw can be null, handle it appropriately
-            ConditionList = ConditionListRaw?.Select(ConvertJObjectToConditionData).ToList() ?? new List<ConditionData>();
-        }
-
-
-        private ConditionData ConvertJObjectToConditionData(JObject jObject)
-        {
-            var typeName = jObject["type"].ToObject<string>();
-            var conditionType = typeof(ConditionData).Assembly.GetTypes().FirstOrDefault(t => t.Name == typeName);
-
-            if (conditionType == null || !typeof(ConditionData).IsAssignableFrom(conditionType))
-            {
-                throw new NotSupportedException($"Condition type '{typeName}' is not supported.");
-            }
-
-            var condition = (ConditionData)Activator.CreateInstance(conditionType);
-        
-            // Use the JsonReader directly
-            using (var jObjectReader = jObject.CreateReader())
-            {
-                // Populate the object
-                JsonSerializer.CreateDefault().Populate(jObjectReader, condition);
-            }
-
-            return condition;
+            // ConditionList = ConditionListRaw?.Select(ConvertJObjectToConditionData).ToList() ?? new List<Condition>();
+            ConditionList =
+                ConditionListRaw?.Select(new ConvertJObject<Condition>().ConvertJObjectToConditionData).ToList() ??
+                new List<Condition>();
+            ActionList =
+                ActionListRaw?.Select(new ConvertJObject<TriggerAction>().ConvertJObjectToConditionData).ToList() ??
+                new List<TriggerAction>();
         }
     }
 
@@ -81,33 +67,5 @@ namespace Script.Data
     }
     #endregion
     
-    #region Condtions
-    [Serializable]
-    public abstract class ConditionData
-    {  
-        public string Type { get; set; }
-        public abstract void Init();
-    }
-    [Serializable]
-    public class DayConditionData : ConditionData
-    {
-        public int startDay;
-        public int endDay;
-        public override void Init()
-        {
-            
-        }
-    }
-    [Serializable]
-    public class FlagConditionData : ConditionData
-    {
-        public string name;
-        public int flag;
-        public override void Init()
-        {
-            
-        }
-    }
 
-    #endregion
 }
