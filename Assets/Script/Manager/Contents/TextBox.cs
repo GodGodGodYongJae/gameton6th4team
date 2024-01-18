@@ -28,19 +28,20 @@ namespace Script.Manager.Contents
             return _viewText.textInfo.pageCount;
         }
 
-        public int GetHeightSize()
+        public float GetHeightSize()
         {
-            return (int)_boxSize.y;
+            return _boxSize.y + ((GetPageCount()-1) * 50);
         }
 
-        public void SetHeightBox()
+        public void SetHeightBox(Action callback)
         {
             if (GetPageCount() == 0)
             {
                 SyncSize(() =>
                 { 
                     Debug.Log("-"+GetPageCount());
-                    _rectTransform.sizeDelta = new Vector2(_boxSize.x, _boxSize.y + (GetPageCount() * 50));
+                    _rectTransform.sizeDelta = new Vector2(_boxSize.x, GetHeightSize());
+                    callback?.Invoke();
                 }).Forget();
             }
      

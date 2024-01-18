@@ -26,7 +26,7 @@ namespace Script.Manager.Contents
             _contentRect = _content.GetComponent<RectTransform>();
         }
 
-        private int _currentPage = 0;
+        private int _currentPage = 1;
         public void AddCurrentPageText(string text)
         {
             Managers.Resource.Load<GameObject>("TextBox", (success) =>
@@ -34,14 +34,20 @@ namespace Script.Manager.Contents
                 GameObject textBoxGo = Object.Instantiate(success,_content.transform);
                 TextBox textBox = textBoxGo.GetComponent<TextBox>();
                 textBox.SetText(text);
-                textBox.SetHeightBox();
-                if (_contentRect.sizeDelta.y > MaxHeightSize)
-                {
-                    Debug.Log("사이즈 초과");
-                }
+                textBox.SetHeightBox(()=>CheckSize(textBox));
             });
         }
 
+        private void CheckSize( TextBox textBox)
+        {
+            Debug.Log(_contentRect.sizeDelta.y + textBox.GetHeightSize());
+            if (_contentRect.sizeDelta.y + textBox.GetHeightSize() > MaxHeightSize)
+            {
+                Debug.Log("사이즈 초과");
+                return;
+            }
+            // _pageContents.Add(textBox);
+        }
 
     }
 }
