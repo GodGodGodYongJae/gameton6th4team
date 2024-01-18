@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     private GameObject _target;
     public float CameraSpeed { get; private set; } = 2.0f;
     private Vector3 _targetPos;
-    // Update is called once per frame
+    //TEST
     void FixedUpdate()
     {
         _targetPos = _target.transform.position;
