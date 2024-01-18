@@ -29,6 +29,7 @@ public class UI_TestScene :UI_Scene
                 {
                     Managers.Game.Note = Object.Instantiate(success, this.transform).GetComponent<Note>();
                     Managers.Data.Init();
+                    Managers.Game.NextDay();
                 });
             }
             

@@ -9,7 +9,6 @@ public class DayCondition : Condition
     public int endDay;
     public override bool CheckCondition()
     {
-        Debug.Log($"{startDay}{endDay} DayCondition");
         return Utils.InRange(Managers.Game.CurrentDay, startDay, endDay);
     }
 }

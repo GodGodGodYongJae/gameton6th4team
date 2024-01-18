@@ -33,6 +33,7 @@ namespace Script.Data
     [Serializable]
     public class TriggerData
     {
+        public string name;
         public int id;
         [JsonProperty("ConditionList")] public List<JObject> ConditionListRaw;
 

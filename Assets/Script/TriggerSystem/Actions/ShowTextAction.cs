@@ -1,12 +1,9 @@
 ﻿
-using System;
-using UnityEngine;
-
 public class ShowTextAction : TriggerAction
 {
-    public int textNumber;
+    public string text;
     public override void RunAction()
     {
-        Managers.Game.ShowNotePage(textNumber);
+        Managers.Game.AddTextNote(text);
     }
 }

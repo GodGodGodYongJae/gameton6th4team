@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.Manager.Contents;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager
@@ -31,8 +32,20 @@ public class GameManager
 
     #region Day
 
-    public int CurrentDay { get; private set; }
-    
+    public int CurrentDay { get; private set; } = 0;
+    private TriggerEvent _triggerEvent = null;
+
+    public void NextDay()
+    {
+        if (_triggerEvent == null)
+        {
+            GameObject triggerEventObject = new GameObject();
+            _triggerEvent = triggerEventObject.GetOrAddComponent<TriggerEvent>();
+        }
+        CurrentDay++;
+        _triggerEvent.StartTrigger();
+
+    }
 
     #endregion
 
@@ -50,6 +63,13 @@ public class GameManager
     public void ShowNotePage(int pageNum)
     {
         //TODO : 해당 페이지 넘버를 DataManager를 통해 불러온뒤 오브젝트를 만들어준다. 이후 ...
+        // Note.Add
+        // Managers.Data.TextDatas[pageNum].text;
+    }
+
+    public void AddTextNote(string text)
+    {
+        Note.AddCurrentPageText(text);
     }
 
     #endregion

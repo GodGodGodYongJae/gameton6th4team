@@ -25,7 +25,18 @@ MonoBehaviour:
   - m_GUID: ef5de5840ee33134b9f64d4a8b385191
     m_Address: textData
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 6e39f84c80f351a4caed4bf4ce849232
+    m_Address: triggerData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: fa9dcc6f768e2c740ad38e43c92d481e
+    m_Address: TextBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cebdd18c72cca94479e4b43027aad42b, type: 2}
   m_SchemaSet:
