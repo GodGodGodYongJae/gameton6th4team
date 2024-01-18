@@ -16,11 +16,24 @@ namespace Script.Manager.Core
     public class DataManager
     {
         public Dictionary<int, TextData> TextDatas = new Dictionary<int, TextData>();
+        public Dictionary<int, TriggerData> TriggerDatas = new Dictionary<int, TriggerData>();
 
         public void Init()
         {
             TextDatas = LoadJson<TextDataLoader, int, TextData>("textData").MakeDict();
-            int a = 3;
+            TriggerDatas = LoadJson<TriggerDataLoader, int, TriggerData>("triggerData").MakeDict();
+            // foreach (var T in TriggerDatas)
+            // {
+            //     foreach (var VARIABLE in T.Value.ConditionList)
+            //     {
+            //         VARIABLE.CheckCondition();
+            //     }
+            //
+            //     foreach (var VARIABLE in T.Value.ActionList)
+            //     {
+            //         VARIABLE.RunAction();
+            //     }
+            // }
         }
         Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
         {

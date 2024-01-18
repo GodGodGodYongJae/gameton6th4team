@@ -19,7 +19,7 @@ namespace Script.Tool
 
         private void OnAddText()
         {
-            Object.Instantiate(_textBoxPrefab, _note.GetContentTransform);
+
         }
     }
 }

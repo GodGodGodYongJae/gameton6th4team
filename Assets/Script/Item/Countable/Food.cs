@@ -6,9 +6,9 @@ public class Food : ICountableItem, IEat
 {
     public int GetHunger = 0;
 
-    public void Eat(ICharacter character)
+    public void Eat(Character character)
     {
-        character.SetHunger(character.GetHunger() + GetHunger);
+        character.SetStatusHungry(character.GetStatusHungry + GetHunger);
     }
 
     private int _amount = 0;

@@ -1,0 +1,65 @@
+{
+  "TriggerDatas": [
+    {
+      "id": 1,
+      "ConditionList": [
+        {
+          "type": "DayCondition",
+          "startDay": 0,
+          "endDay": 15
+        },
+        {
+          "type": "FlagCondition",
+          "name": "test",
+          "flag": 1
+        }
+      ],
+      "ActionList": [
+        {
+          "type": "ShowTextAction",
+          "text": "ddd"
+        }
+      ]
+
+    },
+    {
+      "id": 2,
+      "ConditionList": [
+        {
+          "type": "DayCondition",
+          "starttDay": 10,
+          "endDay": 20
+        },
+        {
+          "type": "FlagCondition",
+          "name": "test",
+          "flag": 2
+        }
+      ]
+
+    },
+    {
+      "id": 3,
+      "ConditionList": [
+        {
+          "type": "DayCondition",
+          "starttDay": 0,
+          "endDay": 2
+        }
+      ],
+      "ActionList": [
+        {
+          "type": "ShowTextAction",
+          "text": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        }
+        
+      ]
+
+    }
+
+  ]
+}
