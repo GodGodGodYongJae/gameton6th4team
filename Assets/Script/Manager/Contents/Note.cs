@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -33,14 +34,14 @@ namespace Script.Manager.Contents
                 GameObject textBoxGo = Object.Instantiate(success,_content.transform);
                 TextBox textBox = textBoxGo.GetComponent<TextBox>();
                 textBox.SetText(text);
-                Debug.Log(textBox.GetPageCount());
-                textBox.SetHeightBox(textBox.GetPageCount() * 50);
+                textBox.SetHeightBox();
                 if (_contentRect.sizeDelta.y > MaxHeightSize)
                 {
                     Debug.Log("사이즈 초과");
                 }
             });
         }
+
 
     }
 }

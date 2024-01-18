@@ -5,7 +5,7 @@
       "ConditionList": [
         {
           "type": "DayCondition",
-          "startDay": 10,
+          "startDay": 0,
           "endDay": 15
         },
         {

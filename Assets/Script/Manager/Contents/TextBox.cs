@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -8,13 +9,14 @@ namespace Script.Manager.Contents
     {
         private Vector2 _boxSize;
         private RectTransform _rectTransform;
-        [SerializeField] private TMP_Text   _viewText;
+        [SerializeField] private TMP_Text  _viewText;
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
             _boxSize = _rectTransform.sizeDelta;
 
         }
+        
 
         public void SetText(string text)
         {
@@ -31,9 +33,26 @@ namespace Script.Manager.Contents
             return (int)_boxSize.y;
         }
 
-        public void SetHeightBox(int value)
+        public void SetHeightBox()
         {
-            _rectTransform.sizeDelta = new Vector2(_boxSize.x, _boxSize.y + value);
+            if (GetPageCount() == 0)
+            {
+                SyncSize(() =>
+                { 
+                    Debug.Log("-"+GetPageCount());
+                    _rectTransform.sizeDelta = new Vector2(_boxSize.x, _boxSize.y + (GetPageCount() * 50));
+                }).Forget();
+            }
+     
+        }
+
+        // 생성 후 바로 PageCount가 반영이 안댐...
+        async UniTaskVoid SyncSize(Action callback)
+        {
+            Debug.Log("dd");
+            await UniTask.WaitUntil(() => GetPageCount() != 0);
+            callback?.Invoke();
+            
         }
     }
 }
