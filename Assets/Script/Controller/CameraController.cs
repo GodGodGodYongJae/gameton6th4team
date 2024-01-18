@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
         _targetPos = _target.transform.position;
+     //부드럽게 움직임
         transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * CameraSpeed);
         transform.rotation = Quaternion.Lerp(transform.rotation, _target.transform.rotation, Time.deltaTime * CameraSpeed);
     }
