@@ -28,6 +28,7 @@ public class UI_Title : UI_Scene
             {
                 //Managers.Scene.LoadScene(Define.Scene.LobbyScene);
                 //// 씬 이동 할 필요없이 버튼만 추가하면 될 듯?
+                /// TEST
             }
         });
         return true;
