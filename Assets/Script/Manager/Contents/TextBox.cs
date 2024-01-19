@@ -1,6 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Script.Manager.Contents
@@ -14,14 +16,23 @@ namespace Script.Manager.Contents
         {
             _rectTransform = GetComponent<RectTransform>();
             _boxSize = _rectTransform.sizeDelta;
-
+            this.UpdateAsObservable()
+                .Select(_ => GetPageCount() != 0)
+                .DistinctUntilChanged()
+                .Where(x => x)
+                .Subscribe(_ => SetHeightBox());
         }
-        
 
+        private Action _sizeCheckAction;
         public void SetText(string text)
         {
             _viewText.text = text;
         }
+        private void SetHeightBox()
+        {
+            _rectTransform.sizeDelta = new Vector2(_boxSize.x, GetHeightSize());
+        }
+        public String GetText() => _viewText.text;
 
         public int GetPageCount()
         {
@@ -33,27 +44,7 @@ namespace Script.Manager.Contents
             return _boxSize.y + ((GetPageCount()-1) * 50);
         }
 
-        public void SetHeightBox(Action callback)
-        {
-            if (GetPageCount() == 0)
-            {
-                SyncSize(() =>
-                { 
-                    Debug.Log("-"+GetPageCount());
-                    _rectTransform.sizeDelta = new Vector2(_boxSize.x, GetHeightSize());
-                    callback?.Invoke();
-                }).Forget();
-            }
-     
-        }
 
-        // 생성 후 바로 PageCount가 반영이 안댐...
-        async UniTaskVoid SyncSize(Action callback)
-        {
-            Debug.Log("dd");
-            await UniTask.WaitUntil(() => GetPageCount() != 0);
-            callback?.Invoke();
-            
-        }
+
     }
 }

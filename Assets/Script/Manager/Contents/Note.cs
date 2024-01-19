@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -24,6 +27,23 @@ namespace Script.Manager.Contents
         private void Awake()
         {
             _contentRect = _content.GetComponent<RectTransform>();
+            this.UpdateAsObservable()
+                .Select(_ => _contentRect.sizeDelta)
+                .Where(x=> x.y > MaxHeightSize)
+                .Subscribe(x =>
+                {
+                    Debug.Log($"값변화함 {x}");
+                    var findLast = _pageContents[_currentPage].Last();
+                    _pageContents[_currentPage].RemoveAt(_pageContents[_currentPage].Count-1);
+                    _currentPage++;
+                    AddPage(findLast);
+                    findLast.SetActive(false);
+                });
+        }
+
+        private void Update()
+        {
+            int a = 3;
         }
 
         private int _currentPage = 1;
@@ -34,19 +54,19 @@ namespace Script.Manager.Contents
                 GameObject textBoxGo = Object.Instantiate(success,_content.transform);
                 TextBox textBox = textBoxGo.GetComponent<TextBox>();
                 textBox.SetText(text);
-                textBox.SetHeightBox(()=>CheckSize(textBox));
+                AddPage(textBoxGo);
             });
         }
 
-        private void CheckSize( TextBox textBox)
+        private void AddPage(GameObject pageItem)
         {
-            Debug.Log(_contentRect.sizeDelta.y + textBox.GetHeightSize());
-            if (_contentRect.sizeDelta.y + textBox.GetHeightSize() > MaxHeightSize)
+            if (!_pageContents.ContainsKey(_currentPage))
             {
-                Debug.Log("사이즈 초과");
-                return;
+                _pageContents.Add(_currentPage,new List<GameObject>());
+                   
             }
-            // _pageContents.Add(textBox);
+            Debug.Log("추가댐");
+            _pageContents[_currentPage].Add(pageItem);
         }
 
     }
