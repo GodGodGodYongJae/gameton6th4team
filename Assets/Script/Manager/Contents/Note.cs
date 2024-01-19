@@ -24,6 +24,7 @@ namespace Script.Manager.Contents
         // 3. 페이지 변화시 해당 페이지의 컨텐츠를 보여준다.
         // 4. Content는 (Text나 기타 등등에 Component를 하나 붙이자 만들어줄 때 사이즈를 해당 컴포넌트에서 알아서 계산할 수 있도록.)
         
+        //TODO 끝난걸 알려줘야 첫장 빼고 false 해줄 수 있음.
         private void Awake()
         {
             _contentRect = _content.GetComponent<RectTransform>();
@@ -35,9 +36,14 @@ namespace Script.Manager.Contents
                     Debug.Log($"값변화함 {x}");
                     var findLast = _pageContents[_currentPage].Last();
                     _pageContents[_currentPage].RemoveAt(_pageContents[_currentPage].Count-1);
+                    // 또 다음 페이지 검증해야해서 싹다 false
+                    foreach (var gameObject in _pageContents[_currentPage])
+                    {
+                        gameObject.SetActive(false);
+                    }
                     _currentPage++;
                     AddPage(findLast);
-                    findLast.SetActive(false);
+                  
                 });
         }
 

@@ -47,21 +47,131 @@
           "endDay": 2
         }
       ],
+      "ConditionList": [
+        {
+          "type": "DayCondition",
+          "starttDay": 0,
+          "endDay": 2
+        }
+      ],
       "ActionList": [
         {
           "type": "ShowTextAction",
-          "text": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+          "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         },
         {
           "type": "ShowTextAction",
-          "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+          "text": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate."
         },
         {
           "type": "ShowTextAction",
-          "text": "ABCDEFGHIJKEFDAFAFASFASFASFKSALFKASLFKAS:LFKASL:FKXFXFMXFMXM<FAFAKSLFJASFJASLFJASKLFJASKLFJAKLSFJASFJALKFJSIFAISOFJAOFJSFASF"
+          "text": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Programming is the art of doing one thing at a time."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Life is really simple, but we insist on making it complicated."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The only limit to our realization of tomorrow will be our doubts of today."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Success is not final, failure is not fatal: It is the courage to continue that counts."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The purpose of our lives is to be happy."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "You only live once, but if you do it right, once is enough."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Be the change that you wish to see in the world."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The best way to predict the future is to create it."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Don't watch the clock; do what it does. Keep going."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The only way to do great work is to love what you do."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Believe you can and you're halfway there."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Your time is limited, don't waste it living someone else's life."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The journey of a thousand miles begins with one step."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Simplicity is the ultimate sophistication."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Strive not to be a success, but rather to be of value."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "I find that the harder I work, the more luck I seem to have."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "You miss 100% of the shots you don't take."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "It does not matter how slowly you go as long as you do not stop."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Life is what happens when you're busy making other plans."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The only person you are destined to become is the person you decide to be."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The future belongs to those who believe in the beauty of their dreams."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Do not wait to strike till the iron is hot, but make it hot by striking."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The best revenge is to be unlike him who performed the injustice."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "The only way to do great work is to love what you do."
+        },
+        {
+          "type": "ShowTextAction",
+          "text": "Believe you can and you're halfway there."
         }
       ]
-
     }
 
   ]
