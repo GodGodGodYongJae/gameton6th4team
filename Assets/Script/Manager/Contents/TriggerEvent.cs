@@ -7,7 +7,7 @@
     public class TriggerEvent : MonoBehaviour
     {
         private List<TriggerData> _triggerDatas;
-        public void StartTrigger()
+        public void StartTrigger(Action callback)
         {
             _triggerDatas ??= Managers.Data.TriggerDatas.Values.ToList();
             
@@ -27,6 +27,7 @@
                     triggerAction.RunAction();
                 }
             }
-
+            // 트리거 로드가 모두 끝났을 때 실행
+            callback?.Invoke();
         }
     }

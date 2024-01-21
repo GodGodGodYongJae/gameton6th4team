@@ -25,26 +25,27 @@ namespace Script.Manager.Contents
         // 4. Content는 (Text나 기타 등등에 Component를 하나 붙이자 만들어줄 때 사이즈를 해당 컴포넌트에서 알아서 계산할 수 있도록.)
         
         //TODO 끝난걸 알려줘야 첫장 빼고 false 해줄 수 있음.
+        private const float ContentSize = -600f;
         private void Awake()
         {
             _contentRect = _content.GetComponent<RectTransform>();
-            this.UpdateAsObservable()
-                .Select(_ => _contentRect.sizeDelta)
-                .Where(x=> x.y > MaxHeightSize)
-                .Subscribe(x =>
-                {
-                    Debug.Log($"값변화함 {x}");
-                    var findLast = _pageContents[_currentPage].Last();
-                    _pageContents[_currentPage].RemoveAt(_pageContents[_currentPage].Count-1);
-                    // 또 다음 페이지 검증해야해서 싹다 false
-                    foreach (var gameObject in _pageContents[_currentPage])
-                    {
-                        gameObject.SetActive(false);
-                    }
-                    _currentPage++;
-                    AddPage(findLast);
-                  
-                });
+            // this.UpdateAsObservable()
+            //     .Select(_ => _contentRect.sizeDelta)
+            //     .Where(x=> x.y > MaxHeightSize)
+            //     .Subscribe(x =>
+            //     {
+            //         // 다시 짜야함
+            //         Debug.Log($"값변화함 {x}");
+            //         var findLast = _pageContents[_currentPage].Last();
+            //         _pageContents[_currentPage].RemoveAt(_pageContents[_currentPage].Count-1);
+            //         // // 또 다음 페이지 검증해야해서 싹다 false
+            //         foreach (var gameObject in _pageContents[_currentPage])
+            //         {
+            //             gameObject.SetActive(false);
+            //         }
+            //         _currentPage++;
+            //         AddPage(findLast);
+            //     });
         }
 
         private void Update()
@@ -53,27 +54,27 @@ namespace Script.Manager.Contents
         }
 
         private int _currentPage = 1;
-        public void AddCurrentPageText(string text)
-        {
-            Managers.Resource.Load<GameObject>("TextBox", (success) =>
-            {
-                GameObject textBoxGo = Object.Instantiate(success,_content.transform);
-                TextBox textBox = textBoxGo.GetComponent<TextBox>();
-                textBox.SetText(text);
-                AddPage(textBoxGo);
-            });
-        }
+        // public void AddCurrentPageText(string text)
+        // {
+        //     Managers.Resource.Load<GameObject>("TextBox", (success) =>
+        //     {
+        //         GameObject textBoxGo = Object.Instantiate(success,_content.transform);
+        //         TextBox textBox = textBoxGo.GetComponent<TextBox>();
+        //         textBox.SetText(text);
+        //         AddPage(textBoxGo);
+        //     });
+        // }
 
-        private void AddPage(GameObject pageItem)
-        {
-            if (!_pageContents.ContainsKey(_currentPage))
-            {
-                _pageContents.Add(_currentPage,new List<GameObject>());
-                   
-            }
-            Debug.Log("추가댐");
-            _pageContents[_currentPage].Add(pageItem);
-        }
+        // private void AddPage(GameObject pageItem)
+        // {
+        //     if (!_pageContents.ContainsKey(_currentPage))
+        //     {
+        //         _pageContents.Add(_currentPage,new List<GameObject>());
+        //            
+        //     }
+        //     Debug.Log("추가댐");
+        //     _pageContents[_currentPage].Add(pageItem);
+        // }
 
     }
 }

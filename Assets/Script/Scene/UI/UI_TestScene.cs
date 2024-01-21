@@ -25,9 +25,9 @@ public class UI_TestScene :UI_Scene
             {
                 Debug.Log("end");
                 isPreload = true;
-                Managers.Resource.Load<GameObject>("Note", (success) =>
+                Managers.Resource.Load<GameObject>("Book", (success) =>
                 {
-                    Managers.Game.Note = Object.Instantiate(success, this.transform).GetComponent<Note>();
+                     Managers.Game.Book = Object.Instantiate(success, this.transform).GetComponent<Book>();
                     Managers.Data.Init();
                     Managers.Game.NextDay();
                 });
