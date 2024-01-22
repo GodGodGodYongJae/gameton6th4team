@@ -5,19 +5,18 @@
       "ConditionList": [
         {
           "type": "DayCondition",
-          "startDay": 0,
-          "endDay": 15
-        },
-        {
-          "type": "FlagCondition",
-          "name": "test",
-          "flag": 1
+          "startDay": 1,
+          "endDay": 1
         }
       ],
       "ActionList": [
         {
           "type": "ShowTextAction",
           "text": "우리는 무인도에 갇혔다. 여긴 어디지??"
+        },
+        {
+          "type": "SetActiveShowCharacterStatusAction",
+          "active": false
         }
       ]
 
@@ -27,15 +26,20 @@
       "ConditionList": [
         {
           "type": "DayCondition",
-          "starttDay": 10,
-          "endDay": 20
-        },
-        {
-          "type": "FlagCondition",
-          "name": "test",
-          "flag": 2
+          "startDay": 2,
+          "endDay": 2
         }
-      ]
+      ], 
+      "ActionList": [
+      {
+        "type": "ShowTextAction",
+        "text": "1일이 지났다."
+      },
+      {
+        "type": "SetActiveShowCharacterStatus",
+        "active": true
+      }
+    ]
 
     },
     {
@@ -45,6 +49,11 @@
           "type": "DayCondition",
           "startDay": 1000,
           "endDay": 2
+        },
+        {
+          "type": "FlagCondition",
+          "name": "test",
+          "flag": 1
         }
       ],
       "ActionList": [

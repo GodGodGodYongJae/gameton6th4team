@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public float GetStatusHungry => _status[Define.CharacterStatus.Hungry];
 
     public float GetStatusValue(Define.CharacterStatus status) => _status[status];
+    public void SetStatusValue(Define.CharacterStatus status, float value) => _status[status] = value;
     public List<string> StatusText = new List<string>();
     public List<string> DisplaySatus = new List<string>();
     public Dictionary<string, int> Flags = new Dictionary<string, int>();

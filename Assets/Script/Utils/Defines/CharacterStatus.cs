@@ -5,4 +5,11 @@
         Hungry,
         Thirsty
     }
+
+    public enum SetStatusAction
+    {
+        Add,
+        Mod,
+        Sub
+    }
 }

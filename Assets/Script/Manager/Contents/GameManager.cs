@@ -49,7 +49,10 @@ public class GameManager
         CurrentDay++;
         _triggerEvent.StartTrigger(()=>
         {
-            ShowCharacterText();
+            if (_activeShowStatus)
+            {
+                ShowCharacterText();
+            }
             EndNote();
         });
 
@@ -86,7 +89,8 @@ public class GameManager
     #region CharacterText
 
     public List<Character> Characters{get; private set; } = new List<Character>();
-
+    private bool _activeShowStatus;
+    public Character SelectCharacter { get; set; }
     public void AddCharacter(Character character)
     {
         Characters.Add(character);
@@ -118,7 +122,7 @@ public class GameManager
         }
     }
 
-    #endregion
+
 
     private void CheckStatus()
     {
@@ -140,5 +144,52 @@ public class GameManager
              
             }
         }
+    }
+
+    public void ActiveShowCharacterStatus(bool active)
+    {
+        _activeShowStatus = active;
+    }
+    #endregion
+
+    public void AllCharacterStatusCalculate(Define.CharacterStatus status, Define.SetStatusAction calculate, float value)
+    {
+        foreach (var character in Characters)
+        {
+            float calculateValue = character.GetStatusValue(status);
+            switch (calculate)
+            {
+                case Define.SetStatusAction.Add:
+                    calculateValue += value;
+                    break;
+                case Define.SetStatusAction.Mod:
+                    calculateValue = value;
+                    break;
+                case Define.SetStatusAction.Sub:
+                    calculateValue -= value;
+                    break;
+            }
+
+            character.SetStatusValue(status, calculateValue);
+        }
+    }
+
+    public void SelectCharacterStatusCalculate(Define.CharacterStatus status, Define.SetStatusAction calculate,
+        float value)
+    {
+        float calculateValue = SelectCharacter.GetStatusValue(status);
+        switch (calculate)
+        {
+            case Define.SetStatusAction.Add:
+                calculateValue += value;
+                break;
+            case Define.SetStatusAction.Mod:
+                calculateValue = value;
+                break;
+            case Define.SetStatusAction.Sub:
+                calculateValue -= value;
+                break;
+        }
+        SelectCharacter.SetStatusValue(status,calculateValue);
     }
 }
