@@ -8,7 +8,7 @@ public class Food : ICountableItem, IEat
 
     public void Eat(Character character)
     {
-        character.SetStatusHungry(character.GetStatusHungry + GetHunger);
+        // character.SetStatusHungry(character.GetStatusHungry + GetHunger);
     }
 
     private int _amount = 0;

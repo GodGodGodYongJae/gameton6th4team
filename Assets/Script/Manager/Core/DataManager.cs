@@ -17,23 +17,15 @@ namespace Script.Manager.Core
     {
         public Dictionary<int, TextData> TextDatas = new Dictionary<int, TextData>();
         public Dictionary<int, TriggerData> TriggerDatas = new Dictionary<int, TriggerData>();
+        public Dictionary<int, CharacterStatusData> CharacterStatusDatas = new Dictionary<int, CharacterStatusData>();
 
         public void Init()
         {
             TextDatas = LoadJson<TextDataLoader, int, TextData>("textData").MakeDict();
             TriggerDatas = LoadJson<TriggerDataLoader, int, TriggerData>("triggerData").MakeDict();
-            // foreach (var T in TriggerDatas)
-            // {
-            //     foreach (var VARIABLE in T.Value.ConditionList)
-            //     {
-            //         VARIABLE.CheckCondition();
-            //     }
-            //
-            //     foreach (var VARIABLE in T.Value.ActionList)
-            //     {
-            //         VARIABLE.RunAction();
-            //     }
-            // }
+            CharacterStatusDatas = LoadJson<CharacterStatusDataLoader, int, CharacterStatusData>("characterStatusData")
+                .MakeDict();
+
         }
         Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
         {

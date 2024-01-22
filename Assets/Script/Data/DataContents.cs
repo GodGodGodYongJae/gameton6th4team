@@ -28,6 +28,35 @@ namespace Script.Data
     }
     #endregion
 
+    #region CharacterStatusText
+    // "_comment" :
+    // "id": 2,
+    // "status": "H
+    // "value": 20,
+    // "Text" : "배고
+    // "display" : 
+    [Serializable]
+    public class CharacterStatusData
+    {
+        public int id;
+        public Define.CharacterStatus status;
+        public float minValue;
+        public float maxValue;
+        public string text;
+        public string display;
+    }
+    [Serializable]
+    public class CharacterStatusDataLoader : ILoader<int, CharacterStatusData>
+    {
+        public List<CharacterStatusData> CharacterStatusDatas = new List<CharacterStatusData>();
+        public Dictionary<int, CharacterStatusData> MakeDict()
+        {
+            return CharacterStatusDatas.GroupBy(data => data.id).ToDictionary(group => group.Key, group => group.First());
+        }
+    }
+
+    #endregion
+
     #region Trigger
 
     [Serializable]

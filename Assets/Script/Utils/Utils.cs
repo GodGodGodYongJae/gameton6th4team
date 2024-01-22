@@ -57,4 +57,8 @@ public static class Utils
     {
         return value >= minValue && value <= maxValue;
     }
+    public static bool InRange(float value, float minValue, float maxValue)
+    {
+        return value >= minValue && value <= maxValue;
+    }
 }

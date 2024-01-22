@@ -25,6 +25,18 @@ public class UI_TestScene :UI_Scene
             {
                 Debug.Log("end");
                 isPreload = true;
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Managers.Resource.Load<GameObject>("Character", (success) =>
+                    {
+                        Character character = Object.Instantiate(success).GetComponent<Character>();
+                        character.SetName("Test"+i);
+                        Managers.Game.AddCharacter(character);
+                    
+                    });
+                }
+             
                 Managers.Resource.Load<GameObject>("Book", (success) =>
                 {
                      Managers.Game.Book = Object.Instantiate(success, this.transform).GetComponent<Book>();

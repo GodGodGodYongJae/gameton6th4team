@@ -1,0 +1,40 @@
+{
+  "CharacterStatusDatas":[
+    {
+      "_comment" : "Hungry 수치가 10 이하 일 경우",
+      "id": 1,
+      "status": "Hungry",
+      "minValue": 0,
+      "maxValue": 10,
+      "Text" : "배고파 뒤질것 같음.",
+      "display" : "매우 배고픔"
+    },
+    {
+      "_comment" : "Hungry 수치가 20 이하 일 경우",
+      "id": 2,
+      "status": "Hungry",
+      "minValue": 11,
+      "maxValue": 20,
+      "Text" : "배고파 함",
+      "display" : "배고픔"
+    },
+    {
+      "_comment" : "목마름 수치가 10 이하 일 경우",
+      "id": 3,
+      "status": "Thirsty",
+      "minValue": 0,
+      "maxValue": 10,
+      "Text" : "탈수 상태임.",
+      "display" : "탈수"
+    },
+    {
+      "_comment" : "목마름 수치가 20 이하 일 경우",
+      "id": 4,
+      "status": "Thirsty",
+      "minValue": 11,
+      "maxValue": 20,
+      "Text" : "목말라 죽을것 같은 상태임.",
+      "display" : "갈증"
+    }
+  ]
+}

@@ -17,7 +17,7 @@
       "ActionList": [
         {
           "type": "ShowTextAction",
-          "text": "ddd"
+          "text": "우리는 무인도에 갇혔다. 여긴 어디지??"
         }
       ]
 
@@ -43,14 +43,7 @@
       "ConditionList": [
         {
           "type": "DayCondition",
-          "starttDay": 0,
-          "endDay": 2
-        }
-      ],
-      "ConditionList": [
-        {
-          "type": "DayCondition",
-          "starttDay": 0,
+          "startDay": 1000,
           "endDay": 2
         }
       ],
