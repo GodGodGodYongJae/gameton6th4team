@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEditor.UI;
+using UnityEngine.UI;
 
 public class BookContents : MonoBehaviour
 {
@@ -10,7 +12,8 @@ public class BookContents : MonoBehaviour
     [SerializeField] private TMP_Text rightSide;
     [Space][SerializeField] private TMP_Text leftPagination;
     [SerializeField] private TMP_Text rightPagination;
-
+    [SerializeField] private Image foodcliker;
+    [SerializeField] private Image eventclicker;
     private void OnValidate()
     {
         UpdatePagination();
@@ -23,6 +26,8 @@ public class BookContents : MonoBehaviour
 
     private void Awake()
     {
+        foodcliker.gameObject.SetActive(false);
+        eventclicker.gameObject.SetActive(false);
         SetupContent();
         UpdatePagination();
     }
@@ -59,8 +64,13 @@ public class BookContents : MonoBehaviour
 
     public void NextPage()
     {
-        if (rightSide.pageToDisplay >= rightSide.textInfo.pageCount) // 이미 마지막페이지라면 넘어가지 않음
-            return;
+        if (rightSide.pageToDisplay >= rightSide.textInfo.pageCount) // 이미 마지막페이지라면
+        {
+            leftSide.gameObject.SetActive(false);
+            rightSide.gameObject.SetActive(false);
+            foodcliker.gameObject.SetActive(true);
+            eventclicker.gameObject.SetActive(true);
+        }
 
         if (leftSide.pageToDisplay >= leftSide.textInfo.pageCount - 1) //왼쪽이 마지막페이지-1보다 크거나 같으면
         {
