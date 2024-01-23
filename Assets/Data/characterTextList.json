@@ -15,7 +15,6 @@
       "status": "Hungry",
       "minValue": 11,
       "maxValue": 20,
-      "Text" : "배고파 함",
       "display" : "배고픔"
     },
     {
@@ -34,7 +33,8 @@
       "minValue": 11,
       "maxValue": 20,
       "Text" : "목말라 죽을것 같은 상태임.",
-      "display" : "갈증"
+      "display" : "갈증","Text" : "배고파 함",
+    
     }
   ]
 }

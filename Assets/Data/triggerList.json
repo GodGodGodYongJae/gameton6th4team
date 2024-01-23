@@ -36,7 +36,7 @@
         "text": "1일이 지났다."
       },
       {
-        "type": "SetActiveShowCharacterStatus",
+        "type": "SetActiveShowCharacterStatusAction",
         "active": true
       }
     ]
@@ -47,8 +47,8 @@
       "ConditionList": [
         {
           "type": "DayCondition",
-          "startDay": 1000,
-          "endDay": 2
+          "startDay": 3,
+          "endDay": 3
         },
         {
           "type": "FlagCondition",

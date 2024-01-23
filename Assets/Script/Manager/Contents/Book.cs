@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,17 +11,26 @@ public class Book : MonoBehaviour
     [SerializeField] private TMP_Text rightSide;
     [Space][SerializeField] private TMP_Text leftPagination;
     [SerializeField] private TMP_Text rightPagination;
+    private int _maxPageCount;
 
     public void AddText(string text)
     {
         content += text;
     }
 
-    // 모든 텍스트가 끝났을 경우 실행.
+    private void ClearText()
+    {
+        content = "";
+        leftSide.pageToDisplay = -1;
+        rightSide.pageToDisplay = leftSide.pageToDisplay + 1;
+        UpdatePagination();
+    }
+    
     public void EndText()
     {
         leftSide.text = content;
         rightSide.text = content;
+        Debug.Log(_maxPageCount);
         UpdatePagination();
     }
 
@@ -27,7 +38,12 @@ public class Book : MonoBehaviour
     {
         leftPagination.text = leftSide.pageToDisplay.ToString();
         rightPagination.text = rightSide.pageToDisplay.ToString();
+        _maxPageCount = rightSide.textInfo.pageCount + 3;
+
     }
+
+
+
     // Click Event ( 여기서 문제는 맨 마지막 페이지에 해당 콘텐츠가 노출됬을 경우 등등.. 생각해봐야 함 
     public void PreviousPage()
     {
@@ -48,12 +64,15 @@ public class Book : MonoBehaviour
     }
     public void NextPage()
     {
-        if (rightSide.pageToDisplay >= rightSide.textInfo.pageCount) // 이미 마지막페이지라면 넘어가지 않음
-            return;
-
-        if (leftSide.pageToDisplay >= leftSide.textInfo.pageCount - 1) //왼쪽이 마지막페이지-1보다 크거나 같으면
+        if (rightSide.pageToDisplay >= _maxPageCount) // rightSide.textInfo.pageCount 이미 마지막페이지라면 넘어가지 않음
         {
-            leftSide.pageToDisplay = leftSide.textInfo.pageCount - 1;//왼쪽은 마지막페이지-1로 설정
+            ClearText();
+            Managers.Game.NextDay();
+        }
+
+        if (leftSide.pageToDisplay >= _maxPageCount - 1) //왼쪽이 마지막페이지-1보다 크거나 같으면
+        {
+            leftSide.pageToDisplay = _maxPageCount - 1;//왼쪽은 마지막페이지-1로 설정
             rightSide.pageToDisplay = leftSide.pageToDisplay + 1; //오른쪽은 왼쪽보다+1된 값으로 설정
         }
         else //둘다 아니라면(끝부분이 아닌 중간 정도쯤이라면)

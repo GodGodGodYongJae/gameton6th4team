@@ -37,8 +37,6 @@ public class GameManager
 
     public void NextDay()
     {
-
-        
         if (_triggerEvent == null)
         {
             GameObject triggerEventObject = new GameObject();
