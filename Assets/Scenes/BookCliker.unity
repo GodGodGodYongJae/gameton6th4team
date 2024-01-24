@@ -628,7 +628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &124322665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1620220974}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BookContents, Assembly-CSharp
           m_MethodName: NextPage
           m_Mode: 1
@@ -1914,7 +1914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &278298799
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3884,7 +3884,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1620220974}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BookContents, Assembly-CSharp
           m_MethodName: PreviousPage
           m_Mode: 1
@@ -7112,9 +7112,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620220969}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 124322665}
@@ -7174,143 +7174,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1620220969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a1f5fb96c330c244b9991ad5809ea62, type: 3}
+  m_Script: {fileID: 11500000, guid: dcbcf89cda4e4ac5aad20504038a49f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: "<mark>CNNnews</mark>\nAs wintry weather whips across the United States,
-    one challenge may be staying warm if you can\u2019t afford or are cutting back
-    on indoor heating.\r\n\r\nStaying warm is necessary \u201Cfor a variety of health
-    reasons\u201D in addition to comfort, said Dr. Georges Benjamin, the executive
-    director of the American Public Health Association. For people with arthritis,
-    stiffness \u201Cin your back and neck and sore joints do occur more in colder
-    weather. \u2026 People who have metabolic conditions can be sensitive to the
-    weather, like diabetes, for example, and heart disease. The more cold you are,
-    the more stress you put on your heart.\u201D\r\n\r\nA little savvy based on our
-    warm-blooded bodies, food, appliances, furniture, the outdoor elements and more
-    can go a long way. Here are 25 ways to stay warm this winter \u2014 with or without
-    indoor heating \u2014 that won\u2019t break the bank.\r\n\r\nHow to warm your
-    body\r\nPortable electric warmers are one way to temporarily keep parts of the
-    body warm.\r\nPortable electric warmers are one way to temporarily keep parts
-    of the body warm.\r\nShutterstock\r\n\r\nWarm up with store-bought hand warmers,
-    microwavable heating pads, hot water bottles or heated blankets. Following the
-    manufacturer\u2019s instructions and concentrating on your torso are key, said
-    JohnEric Smith, an associate professor in the department of kinesiology at Mississippi
-    State University. \u201CIf you warm the core you can warm the hands and feet.
-    It is harder to warm the core by warming the hands and feet.\u201D\r\n\r\nBe
-    careful that you don\u2019t burn yourself, Benjamin said. \u201CThey\u2019re
-    very effective on a knee or shoulder or the back of the neck. \u2026 You rarely
-    put it directly on your skin. You usually wrap it in something, maybe a thin
-    towel.\u201D\r\n\r\n Move your body. Physical activities like indoor exercise
-    or dancing can help you warm up, but don\u2019t get to the point where you\u2019re
-    sweating, Smith said. \u201CWe sweat to lose heat and sweating will make us colder.\u201D\r\n\r\nThink
-    twice about taking a warm shower or bath. \u201CWhile a warm bath or shower will
-    feel good for the minute,\u201D Smith said, \u201Cyou will be cold after you
-    get out and your wet skin is losing heat more quickly.\u201D\r\n\r\nCuddle. Snuggles
-    really can keep you warm. \u201CEach of us produces heat through our metabolic
-    processes. We lose our heat to the environment as we maintain body temperature,\u201D
-    Smith said via email. \u201CIncreasing skin contact decreases opportunities for
-    the heat to be lost to the environment around us. If two people are under a blanket
-    both of their heat losses combined can increase the temperature under the blanket
-    more quickly than either could do independently.\u201D\r\n\r\nChange how you
-    perceive cold. Some people have trained their minds to perceive cold as an objective,
-    acceptable sensation rather than something dreadful to control. The best ways
-    to adapt include wearing clothing in layers then removing it, or gradually lowering
-    the thermostat and putting on a sweater, Benjamin said.\r\n\r\nWarmth that\u2019s
-    comforting\r\nEnjoying warm foods and beverages is a two-in-one solution: You
-    get heat from the appliances when you cook the food, then warmth when you eat
-    it. \r\nEnjoying warm foods and beverages is a two-in-one solution: You get heat
-    from the appliances when you cook the food, then warmth when you eat it.\r\nShutterstock\r\n\r\nEnjoy
-    warm beverages and foods, and use the oven and stove to cook them. Since foods
-    higher in fat and protein are metabolized slowly by the body, those could make
-    you feel warmer, Smith said. \u201CConsider hearty soups with beans and meat.\u201D
-    Slow cooking meals can help generate heat throughout the day.\r\n\r\nDrinking
-    warm beverages \u201Ccertainly helps take the chill off,\u201D Benjamin said.
-    Leaving the oven or stove on is \u201Ca bad idea because it burns fuel,\u201D
-    Benjamin said, \u201Cbut more importantly, people fall asleep, they forget and
-    leave the stove on. Sometimes things on the stove can catch on fire. So like
-    any tool, you should use it for the purpose in which it was designed.\u201D\r\n\r\n\r\n\u201CIt
-    only has to go poorly once to be life changing,\u201D Smith said. If you don\u2019t
-    have children or pets, when you\u2019re done cooking and you turn off the oven,
-    what doesn\u2019t hurt is leaving the oven door open to let residual heat escape.\r\n\r\nHow
-    to dress for the cold\r\nCozying up underneath layers of clothing or blankets
-    (or both) can help insulate you from the cold.\r\nCozying up underneath layers
-    of clothing or blankets (or both) can help insulate you from the cold.\r\nShutterstock\r\n\r\nLayer
-    on the clothes. \u201CLayering is critical,\u201D Smith said. \u201CEven thin
-    layers added together to increase one\u2019s ability to retain heat \u2026 focus
-    on keeping the torso warm. Often an extra shirt or vest can warm your hands and
-    feet more than an extra pair of socks or gloves.\u201D Inexpensive pairs of tights
-    or long johns can be worn underneath clothes. However, be sure that layering
-    doesn\u2019t make your clothing tight, he added, since that could reduce blood
-    flow and thus your body\u2019s ability to get warm blood to those areas. Wearing
-    a hat, too, can also keep the heat in.\r\n\r\nWear thick socks and slippers.
-    Fuzzy socks, slippers or a pair of shoes you reserve for wearing around the house
-    can add extra comfort.\r\n\r\nPile on the blankets. \u201CThe more layers you
-    put on, the better it helps trap the air between you,\u201D your sheets and your
-    blankets, Benjamin said. Since you lose a lot of heat from your head while you\u2019re
-    under blankets, he added, wearing a skull cap can help also.\r\n\r\ntightslead\r\nWinter
-    tights that are equal parts stylish and cozy (Courtesy CNN Underscored)\r\nEmbrace
-    less breathable clothing and linens. Breathable linens (such as the cotton-based
-    variety) are often recommended during the summer, but linens with other materials
-    and higher thread counts may be better for winter since higher thread counts
-    have more weaving per square inch.\r\n\r\nOptimize your home and appliances\r\nThere
-    are multiple ways to make your heating system work better, or to create your
-    own warmth. \r\nThere are multiple ways to make your heating system work better,
-    or to create your own warmth.\r\nShutterstock\r\nWork with the weather. Open
-    your curtains or blinds to let the sun in during the day, or when outside is
-    warmer than inside your home.\r\n\r\nSeal your windows and doors. Even if your
-    windows and doors are totally shut and locked, drafts can seep in through small
-    crevices. You can use caulk or shrink film to seal those cracks. Placing inexpensive,
-    transparent shower curtains over windows can keep the sun in but the cold draft
-    out. For the bottoms of doors, cloth draft stoppers are \u201Cvery effective,\u201D
-    Benjamin said.\r\n\r\nClose off unoccupied rooms. By shutting the doors of rooms
-    no one is using, you can create additional barriers between yourself and the
-    cold outdoors. This can also aid preventing heat loss from the room you\u2019re
-    in.\r\n\r\nReverse your ceiling fan. If possible, send your ceiling fan in a
-    clockwise direction so that it sends the warm air down.\r\n\r\nSit near indoor
-    heaters. You can safely use portable heaters if they are space heaters that have
-    automatic shutoffs and can be plugged into a wall outlet instead of an extension
-    cord. Since space heaters are a common cause of fires, they should be at least
-    3 feet away from any drapes, bedding or furniture. To prevent high levels of
-    carbon monoxide \u2014 which can cause potentially fatal poisoning \u2014 ensure
-    you have a carbon monoxide monitor installed and that you don\u2019t \u201Cuse
-    any type of outdoor gas heater or anything that is not electric,\u201D Benjamin
-    said.\r\n\r\nMove anything that\u2019s blocking heat vents or radiators. The
-    heat will better circulate throughout your home that way.\r\n\r\nSpend time and
-    sleep in the upper levels of the house. Heat rises, so moving your working, sleeping
-    and living spaces upward may be more comfortable.\r\n\r\nAfter showering, don\u2019t
-    run the bathroom fan or close the door. Unless your bathroom is prone to growing
-    humidity-induced mold, the warm steam from the shower can make the nearby air
-    less dry and cool for a short period of time.\r\n\r\nBuy magnetic vent covers
-    from home improvement stores. Used to cover vents, they can be inexpensive and
-    help to force heat to exit vents in the occupied rooms only.\r\n\r\nPut down
-    rugs or carpets. These can be warmer to the touch than bare floors.\r\n\r\n Insulate
-    your attic. If you can afford to, padding your attic with insulation from hardware
-    stores can help to retain some of the heat you usually lose through the attic
-    since heat rises.\r\n\r\n Research what your residential area offers. Some locations
-    may be running warming centers set up for safety during the pandemic.\r\n\r\nCozy
-    up near the elements\r\nSitting near a fire is a method that's always reliable.
-    \r\nSitting near a fire is a method that's always reliable.\r\nShutterstock\r\nLight
-    a fire. If your fireplace runs on wood instead of gas, a fire is another way
-    to keep a room warm and enjoy a cozy night. \u201CMake sure that your flue is
-    properly opened and clean to make sure that smoke doesn\u2019t come back in the
-    home but goes properly up the flue,\u201D Benjamin said. \u201CWhen the fire
-    is out, you should of course close the flue because it\u2019s like having an
-    open window.\u201D\r\n\r\n Keep warm and enjoy s\u2019mores. If your state, city,
-    county or neighborhood allows, have a (moderate-size) backyard bonfire to keep
-    warm for a while.\r\n\r\nDon\u2019t light candles. Candles can emit a small amount
-    of heat, but using them as a source of warmth can be dangerous. \u201CPeople
-    will light candles and go to sleep, and they fall over,\u201D Benjamin said.
-    \u201CThe cat comes in and kicks it over and starts a fire.\u201D\r\n\r\nWith
-    these tips in mind and any others you find, be \u201Cbroadly thoughtful about
-    how to stay warm in the winter,\u201D he added. \u201CIf it sounds like it\u2019s
-    a bad idea, it probably is. Look it up and check it out before you do it.\u201D\r\n\r\nThis
-    story has been updated to reflect recent weather advisories."
+  content: 
   leftSide: {fileID: 1757539264}
   rightSide: {fileID: 1994508738}
   leftPagination: {fileID: 2009792948}
   rightPagination: {fileID: 1369031062}
-  foodcliker: {fileID: 1284089887}
-  eventclicker: {fileID: 1381479306}
+  canvas: {fileID: 0}
 --- !u!1 &1672847548
 GameObject:
   m_ObjectHideFlags: 0
