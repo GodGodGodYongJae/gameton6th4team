@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
+using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,14 +56,21 @@ public class Book : MonoBehaviour
     {
         leftSide.text = content;
         rightSide.text = content;
-        //Debug.Log(_maxPageCount);
-        UpdatePagination();
+
+        this.UpdateAsObservable()
+            .Select(_ => leftSide.textInfo.pageCount)
+            .DistinctUntilChanged()
+            .Where(x => x != 0)
+            .Subscribe(x =>
+            {
+                UpdatePagination();
+            });
+
     }
     
     private void FoodclickerOn()
     {
         foodClicker.gameObject.SetActive(true);
-
     }
 
     public void EndFoodClicker()
@@ -83,7 +92,8 @@ public class Book : MonoBehaviour
     {
         leftPagination.text = leftSide.pageToDisplay.ToString();
         rightPagination.text = rightSide.pageToDisplay.ToString();
-        _maxPageCount = rightSide.textInfo.pageCount + 3;
+        _maxPageCount = rightSide.textInfo.pageCount + 6;
+        Debug.Log("max : " + _maxPageCount);
     }
 
 
@@ -108,7 +118,7 @@ public class Book : MonoBehaviour
     }
     public void NextPage()
     {
-        Debug.Log("max : " + _maxPageCount);
+      
         if (rightSide.pageToDisplay >= _maxPageCount) //rightSide.textInfo.pageCount 이미 마지막페이지라면 넘어가지 않음
         {
             ClearText();

@@ -49,11 +49,6 @@
           "type": "DayCondition",
           "startDay": 3,
           "endDay": 3
-        },
-        {
-          "type": "FlagCondition",
-          "name": "test",
-          "flag": 1
         }
       ],
       "ActionList": [
@@ -172,9 +167,41 @@
         {
           "type": "ShowTextAction",
           "text": "Believe you can and you're halfway there."
+        },
+        {
+          "type": "SetFlag",
+          "flag" : {
+            "name" : "test",
+            "value" : 1
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "name" : "test1",
+          "flag": {
+              "name": "test",
+              "value" : 1
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+        "type": "ShowTextAction",
+        "text" : "Flag Test 1!!"
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "test",
+            "value": 2
+          }
         }
       ]
     }
-
   ]
 }
