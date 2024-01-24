@@ -2,11 +2,10 @@
 using UnityEngine;
     
 public class FlagCondition : Condition
-    {
-        public string name;
-        public int flag;
+{
+        public Flag flag;
         public override bool CheckCondition()
         {
-            return true;
+            return Managers.Game.CheckFlag(flag);
         }
-    }
+}

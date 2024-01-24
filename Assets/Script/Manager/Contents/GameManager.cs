@@ -189,5 +189,67 @@ public class GameManager
                 break;
         }
         SelectCharacter.SetStatusValue(status,calculateValue);
+        SelectCharacter = null;
+    }
+
+    public void RandomCharacterStatusCalculate(Define.CharacterStatus status, Define.SetStatusAction calculate, float value)
+    {
+        Character character = Characters[Random.Range(0, Characters.Count - 1)];
+        float calculateValue = character.GetStatusValue(status);
+        switch (calculate)
+        {
+            case Define.SetStatusAction.Add:
+                calculateValue += value;
+                break;
+            case Define.SetStatusAction.Mod:
+                calculateValue = value;
+                break;
+            case Define.SetStatusAction.Sub:
+                calculateValue -= value;
+                break;
+        }
+
+        character.SetStatusValue(status, calculateValue);
+        
+    }
+
+    #region Flag
+
+    public List<Flag> FlagList { get; private set; } = new List<Flag>();
+    public bool CheckFlag(Flag flag)
+    {
+        Flag findFlag = FlagList.Find(f => f.name == flag.name);
+        if (findFlag == null)
+            return false;
+
+        return findFlag.value == flag.value;
+    }
+    public void SetFlag(Flag flag)
+    {
+        Flag findFlag = FlagList.Find(f => f.name == flag.name);
+        if (findFlag == null)
+        {
+            FlagList.Add(flag);
+        }
+        else
+        {
+            findFlag.value = flag.value;
+        }
+        
+    }
+    
+    public void ShowYesOrNoAction(string text, Flag yesFlag, Flag noFlag)
+    {
+        //TODO
+    }
+
+    #endregion
+
+
+
+    public bool CheckHaveItem(int itemId, int amount)
+    {
+      //TODO
+      return false;
     }
 }
