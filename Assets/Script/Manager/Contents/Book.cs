@@ -64,6 +64,10 @@ public class Book : MonoBehaviour
             .Subscribe(x =>
             {
                 UpdatePagination();
+                ShowSelector(foodClicker, _maxPageCount - 4);
+                ShowSelector(itemClicker, _maxPageCount - 2);
+                ShowSelector(choiceEventClicker, _maxPageCount);
+                
             });
 
     }
@@ -137,5 +141,16 @@ public class Book : MonoBehaviour
         }
 
         UpdatePagination(); //페이지표시업데이트
+    }
+
+    private void ShowSelector(Image image,int currentPage)
+    {
+        this.UpdateAsObservable()
+            .Select(_ => leftSide.pageToDisplay)
+            .Subscribe(x =>
+            {
+                bool active = x == currentPage;
+                image.gameObject.SetActive(active);
+            });
     }
 }
