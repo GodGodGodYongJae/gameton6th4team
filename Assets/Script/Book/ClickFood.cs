@@ -35,7 +35,7 @@ public class ClickFood : MonoBehaviour
         foodBar.fillAmount = currentfood / max;
         if (currentfood > max)
         {
-            overfoodtext.text = "+" + $"{(currentfood - max):N0}";
+            overfoodtext.text = "+" + $"{(currentfood - max):N1}";
         }
         else
         {

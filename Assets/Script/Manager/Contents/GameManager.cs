@@ -45,6 +45,7 @@ public class GameManager
         //ShowCharacterStatus.
       
         CurrentDay++;
+
         _triggerEvent.StartTrigger(()=>
         {
             if (_activeShowStatus)
