@@ -11,9 +11,9 @@ public class Food : ICountableItem, IEat
         //character.SetStatusHungry(character.GetStatusHungry + GetHunger);
     }
 
-    private int _amount = 0;
+    private float _amount = 0;
 
-    public int GetAmount()
+    public float GetAmount()
     {
         return _amount;
     }
@@ -21,12 +21,12 @@ public class Food : ICountableItem, IEat
     [SerializeField]
     private int _maxAmount = 0;
 
-    public int GetMaxAmount()
+    public float GetMaxAmount()
     {
         return _maxAmount;
     }
 
-    public void SetAmount(int amount)
+    public void SetAmount(float amount)
     {
         if (amount >= _maxAmount)
         {
@@ -36,4 +36,5 @@ public class Food : ICountableItem, IEat
 
         _amount = amount;
     }
+
 }
