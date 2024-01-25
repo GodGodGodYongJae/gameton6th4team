@@ -9,14 +9,14 @@ public class Character : MonoBehaviour
     private string _name;
     private bool _isAlive;
     private Sprite _sprite;
+    public Sprite GetCharacterSprite => _sprite;
+    
     private Dictionary<Define.CharacterStatus, float> _status = new Dictionary<Define.CharacterStatus, float>();
-    public float GetStatusHungry => _status[Define.CharacterStatus.Hungry];
 
     public float GetStatusValue(Define.CharacterStatus status) => _status[status];
     public void SetStatusValue(Define.CharacterStatus status, float value) => _status[status] = value;
-    public List<string> StatusText = new List<string>();
-    public List<string> DisplaySatus = new List<string>();
-    public Dictionary<string, int> Flags = new Dictionary<string, int>();
+    public List<string> StatusText { get; set; } = new List<string>();
+    public List<string> DisplayStatusText { get; set; }= new List<string>();
     public bool GetIsAlive => _isAlive;
     public void Awake()
     {
@@ -29,16 +29,8 @@ public class Character : MonoBehaviour
     }
 
     public string SetName(string value) => this._name = value;
-
-    public void SetStatusHungry(int value)
-    {
-        // _status["Hungry"] = value;
-    }
+    
 
     public string GetName() => _name;
 
-    // public void ShowTextRunAction(string text)
-    // {
-    //     ShowTextAction(text);
-    // }
 }

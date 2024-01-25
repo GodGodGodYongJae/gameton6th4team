@@ -1,12 +1,15 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Script.Scene.UI.Selector;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class Book : MonoBehaviour
 {
@@ -16,27 +19,35 @@ public class Book : MonoBehaviour
     [Space][SerializeField] private TMP_Text leftPagination;
     [SerializeField] private TMP_Text rightPagination;
 
-    private Image foodClicker;
-    private Image itemClicker;
-    private Image choiceEventClicker;
-    private Image outEventClicker;
+    // private Image foodClicker;
+    // private Image itemClicker;
+    // private Image choiceEventClicker;
+    // private Image outEventClicker;
 
+    private List<Selector> _selectors = new List<Selector>();
     private int _maxPageCount;
 
+    
     private void Awake()
     {
-        foodClicker = GameObject.Find("Food").GetComponent<Image>();
-        itemClicker = GameObject.Find("ItemChoice").GetComponent<Image>();
-        choiceEventClicker = GameObject.Find("ChoiceEvent").GetComponent<Image>();
-        outEventClicker = GameObject.Find("Outevent").GetComponent<Image>();
+        Managers.Resource.Load<GameObject>("FoodBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<FoodSelector>();
+            _selectors.Add(selectorGameObject);
+        });
+
+        // foodClicker = GameObject.Find("Food").GetComponent<Image>();
+        // itemClicker = GameObject.Find("ItemChoice").GetComponent<Image>();
+        // choiceEventClicker = GameObject.Find("ChoiceEvent").GetComponent<Image>();
+        // outEventClicker = GameObject.Find("Outevent").GetComponent<Image>();
     }
 
     private void Start()
     {
-        foodClicker.gameObject.SetActive(false);
-        itemClicker.gameObject.SetActive(false);
-        choiceEventClicker.gameObject.SetActive(false);
-        outEventClicker.gameObject.SetActive(false);
+        // foodClicker.gameObject.SetActive(false);
+        // itemClicker.gameObject.SetActive(false);
+        // choiceEventClicker.gameObject.SetActive(false);
+        // outEventClicker.gameObject.SetActive(false);
     }
 
     public void AddText(string text)
@@ -64,45 +75,30 @@ public class Book : MonoBehaviour
             .Subscribe(x =>
             {
                 UpdatePagination();
-                ShowSelector(foodClicker, _maxPageCount - 4);
-                ShowSelector(itemClicker, _maxPageCount - 2);
-                ShowSelector(choiceEventClicker, _maxPageCount);
+                int pageCount = _selectors.Count;
+                foreach (var selector in _selectors.Select((value, index) => new { Value = value, Index = index }))
+                {
+                    int reversedIndex = pageCount - 1 - selector.Index;
+                    var currentSelector = selector.Value;
+
+                    currentSelector.ShowCurrentDay();
+                    Debug.Log(_maxPageCount - 2 * reversedIndex);
+                    ShowSelector(currentSelector.gameObject, _maxPageCount - 2 * reversedIndex); // 역순으로 계산
+                }
                 
             });
 
     }
-    
-    private void FoodclickerOn()
-    {
-        foodClicker.gameObject.SetActive(true);
-    }
 
-    public void EndFoodClicker()
-    {
-        //foodClicker.gameObject.SetActive(false);
-        //이다음에 이벤트가 발생하면 다음 클리커 연결
-        ClearText();
-        Managers.Game.NextDay();
-    }
-    public void PreviousPageFood()
-    {
-        foodClicker.gameObject.SetActive(false);
-        leftSide.pageToDisplay -=2; //왼쪽은 마지막페이지+1로 설정
-        rightSide.pageToDisplay = leftSide.pageToDisplay + 1; //오른쪽은 왼쪽보다+1된 값으로 설정
-        UpdatePagination();
-    }
 
     private void UpdatePagination()
     {
         leftPagination.text = leftSide.pageToDisplay.ToString();
         rightPagination.text = rightSide.pageToDisplay.ToString();
-        _maxPageCount = rightSide.textInfo.pageCount + 6;
+        _maxPageCount = rightSide.textInfo.pageCount + _selectors.Count * 2;
         Debug.Log("max : " + _maxPageCount);
     }
 
-
-
-    // Click Event (여기서 문제는 맨 마지막 페이지에 해당 콘텐츠가 노출됬을 경우 등등.. 생각해봐야 함 
     public void PreviousPage()
     {
         if (leftSide.pageToDisplay < 1) //0페이지는 1페이지로 표시
@@ -126,6 +122,10 @@ public class Book : MonoBehaviour
         if (rightSide.pageToDisplay >= _maxPageCount) //rightSide.textInfo.pageCount 이미 마지막페이지라면 넘어가지 않음
         {
             ClearText();
+            foreach (var selector in _selectors)
+            {
+                selector.NextDay();
+            }
             Managers.Game.NextDay();
         }
 
@@ -143,14 +143,14 @@ public class Book : MonoBehaviour
         UpdatePagination(); //페이지표시업데이트
     }
 
-    private void ShowSelector(Image image,int currentPage)
+    private void ShowSelector(GameObject go, int currentPage)
     {
         this.UpdateAsObservable()
             .Select(_ => leftSide.pageToDisplay)
             .Subscribe(x =>
             {
                 bool active = x == currentPage;
-                image.gameObject.SetActive(active);
+                go.SetActive(active);
             });
     }
 }

@@ -16,6 +16,11 @@ public class GameManager
         return _inventory.GetItemList.Values.ToList();
     }
 
+    public Item GetFindByItemName(string name)
+    {
+        return _inventory.FindByItemName(name);
+    }
+
     public void AddItem(Item item,int amount = 0)
     {
         if (item as ICountableItem != null)
@@ -100,7 +105,7 @@ public class GameManager
         foreach (var character in Characters)
         {
             character.StatusText.Clear();
-            character.DisplaySatus.Clear();
+            character.DisplayStatusText.Clear();
         }
     }
     private void ShowCharacterText()
@@ -137,7 +142,7 @@ public class GameManager
                 if (Utils.InRange(character.GetStatusValue(checkStatus),checkMinValue,checkMaxValue) )
                 {
                     character.StatusText.Add(character.GetName() + noteText);
-                    character.DisplaySatus.Add(displayText);
+                    character.DisplayStatusText.Add(displayText);
                     
                 }
              

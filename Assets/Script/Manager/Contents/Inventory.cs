@@ -29,4 +29,15 @@ public class Inventory
         itemCountable =  (ICountableItem)GetItemList[Item.GetName];
         itemCountable.SetAmount(itemCountable.GetAmount() + amount);
     }
+
+    public Item FindByItemName(string name)
+    {
+        if (!GetItemList.ContainsKey(name))
+        {
+            return null;
+        }
+
+        return GetItemList[name];
+    }
+    
 }
