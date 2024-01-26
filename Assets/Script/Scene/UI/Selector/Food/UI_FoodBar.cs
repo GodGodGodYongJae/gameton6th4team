@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Script.Scene.UI.Selector.Food;
+using Sirenix.OdinInspector;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
@@ -7,10 +9,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Script.Scene.UI.Selector
-{
-    public class UI_FoodBar : MonoBehaviour
+
+    public class UI_FoodBar : SerializedMonoBehaviour,IFoodDistribute
     {
+        #region  property
+
         [SerializeField]
         private TextMeshProUGUI _overFoodText;
 
@@ -18,6 +21,9 @@ namespace Script.Scene.UI.Selector
 
         [SerializeField] private float _clickAmount;
 
+        [SerializeField] private FoodType _foodType;
+
+        FoodType IFoodDistribute.GetFoodType() => _foodType;
         public string GetItemName => _itemName;
         
         private float _currentFood = 0f;
@@ -26,9 +32,14 @@ namespace Script.Scene.UI.Selector
 
         private const float MaxValue = 6.0f;
 
-        private Toggle _toggle;
+
+        #endregion
+
+        private Button _button;
 
         private Action _clickAction;
+
+        private int _districbuteCurrentCount = 0;
         
         public void SetClickAction(Action action)
         {
@@ -38,13 +49,8 @@ namespace Script.Scene.UI.Selector
         {
             _image = GetComponent<Image>();
             this.UpdateAsObservable().Select(_ => _currentFood).Subscribe(x => ShowAmountUpdate());
-            _toggle = this.GetOrAddComponent<Toggle>();
-            _toggle.onValueChanged.AddListener(OnChangeToggle);
-        }
-
-        private void OnChangeToggle(bool isOn)
-        {
-            
+            _button = this.GetOrAddComponent<Button>();
+            // _button.c.AddListener(OnChangeToggle);
         }
 
         public void SetCurrentAmount()
@@ -60,10 +66,14 @@ namespace Script.Scene.UI.Selector
         {
             //TODO Manager Item Inventory sub
         }
-
-        private bool isDistricbute = false;
         private void DistributeItem()
         {
+            if (Managers.Game.Characters.Count(character => character.GetIsAlive) <= _districbuteCurrentCount)
+            {
+                CancelDistributeItem();
+                return;
+            }
+            
             if ( _currentFood < _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive))
             {
                 return;
@@ -75,11 +85,30 @@ namespace Script.Scene.UI.Selector
 
         private void CancelDistributeItem()
         {
+            if (_districbuteCurrentCount == 0)
+            {
+                DistributeItem();
+                return;
+            }
             _currentFood += _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive);
+            _districbuteCurrentCount = 0;
         }
         private void ShowAmountUpdate()
         {
             _image.fillAmount = _currentFood / MaxValue;
         }
+
+
+
+        public void CharacterFoodDistribute()
+        {
+            _districbuteCurrentCount++;
+            _currentFood -= _clickAmount;
+        }
+
+        public void CharacterFoodBackIn()
+        {
+            _districbuteCurrentCount--;
+            _currentFood += _clickAmount;
+        }
     }
-}

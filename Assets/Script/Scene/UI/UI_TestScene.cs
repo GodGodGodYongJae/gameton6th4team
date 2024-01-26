@@ -36,6 +36,12 @@ public class UI_TestScene :UI_Scene
                     
                     });
                 }
+
+                EatItem eatItemFood = new EatItem("CanFood");
+                Managers.Game.AddItem(eatItemFood,10);
+                
+                EatItem eatItemWater= new EatItem("Water");
+                Managers.Game.AddItem(eatItemWater,5);
              
                 Managers.Resource.Load<GameObject>("Book", (success) =>
                 {

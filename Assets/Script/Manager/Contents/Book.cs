@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Script.Scene.UI.Selector;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;

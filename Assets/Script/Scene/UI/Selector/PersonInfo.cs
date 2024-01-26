@@ -4,8 +4,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Script.Scene.UI.Selector
-{
+
     public class PersonInfo : MonoBehaviour
     {
             private Sprite _portraitSprite;
@@ -24,4 +23,3 @@ namespace Script.Scene.UI.Selector
             }
 
     }
-}

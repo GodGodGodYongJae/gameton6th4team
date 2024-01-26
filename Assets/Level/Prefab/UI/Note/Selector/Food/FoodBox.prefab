@@ -1001,6 +1001,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b4b9b45f504fb2a6304c0fa069e66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _foodBars:
   - {fileID: 5994804292633370134}
   - {fileID: 3602241350768761767}
@@ -1324,6 +1333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2716fdfcb795457bb5ebfe3b2592e549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _overFoodText: {fileID: 0}
+  _itemName: CanFood
+  _clickAmount: 0.5
+  _foodType: 0
 --- !u!1 &7711042309582455801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3141,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2716fdfcb795457bb5ebfe3b2592e549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _overFoodText: {fileID: 0}
+  _itemName: Water
+  _clickAmount: 0.3
+  _foodType: 1
 --- !u!1001 &7873922568888781342
 PrefabInstance:
   m_ObjectHideFlags: 0

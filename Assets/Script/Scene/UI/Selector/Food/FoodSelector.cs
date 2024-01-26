@@ -4,13 +4,13 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Script.Scene.UI.Selector
-{
     public class FoodSelector : Selector
     {
         private Dictionary<Character,FoodCharacterItem> _characterList = new Dictionary<Character, FoodCharacterItem>();
         [SerializeField] private List<UI_FoodBar> _foodBars = new List<UI_FoodBar>();
 
+
+        
         [SerializeField]
         private GameObject _characterContent;
         private void Start()
@@ -20,6 +20,7 @@ namespace Script.Scene.UI.Selector
                 Managers.Resource.Load<GameObject>("FoodSelector", (success) =>
                 {
                     var infoItem = Object.Instantiate(success, _characterContent.transform).GetComponent<FoodCharacterItem>();
+                    infoItem.SetFoodBarDistribute(_foodBars.Select(bar => (IFoodDistribute)bar).ToList());
                      _characterList.Add(character,infoItem);
                 });
             }
@@ -79,4 +80,3 @@ namespace Script.Scene.UI.Selector
             }
         }
     }
-}
