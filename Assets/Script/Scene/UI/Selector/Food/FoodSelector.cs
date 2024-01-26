@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using Script.Scene.UI.Selector.Food;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -25,37 +27,47 @@ using Object = UnityEngine.Object;
                 });
             }
 
-            FoodBarSetting();
-
         }
 
-        private void FoodBarSetting()
-        {
-            foreach (var bars in _foodBars)
-            {
-                bars.SetClickAction(() =>
-                {
-                    switch (bars.GetItemName)
-                    {
-                        case "CanFood" :
-                            
-                            break;
-                        case "Water" :
-                            break;
-                        default:
-                            break;
-                    }
-                });
-            }
-        }
         public override void NextDay()
         {
-               //TODO FOOD 정산, Character Status 정산 ect .. 
+               //TODO FOOD 정산, Character Status 정산 ect ..
+                FoodAdjustment();
+
+        }
+
+        private void FoodAdjustment()
+        {
+            float useFoodCount = 0;
+            float useWaterCount = 0;
+            foreach (var infoItem in _characterList.Values)
+            {
+                // 이부분 사용 어마운트로 측정해야 함..
+                useFoodCount += infoItem.GetIsEat(FoodType.CanFood) ? _foodBars.First(x => x.GetFoodType == FoodType.CanFood).GetClickAmount : 0;
+                
+
+                useWaterCount += infoItem.GetIsEat(FoodType.Water) ? _foodBars.First(x => x.GetFoodType == FoodType.Water).GetClickAmount : 0;
+            }
+            Debug.Log($"사용한 Food{useFoodCount}, 사용한 Water{useWaterCount}");
+
+            var canFood = Managers.Game.GetFindByItemName("CanFood");
+            var water = Managers.Game.GetFindByItemName("Water");
+               
+            Managers.Game.UseItem(canFood,useFoodCount);
+            Managers.Game.UseItem(water,useWaterCount);
+            ICountableItem ifood = (ICountableItem)canFood;
+            ICountableItem iwater = (ICountableItem)water;
+            Debug.Log($"남은 Food{ifood.GetAmount()}, 남은 Water{iwater.GetAmount()}");
         }
 
         public override void ShowCurrentDay()
         {
             //TODO 현재 식량 , 현재 캐릭터 상태값 표기.
+            foreach (var info in _characterList.Values)
+            {
+                info.SetEatToggle(FoodType.CanFood, false);
+                info.SetEatToggle(FoodType.Water, false);
+            }
            ShowDisplayStatusText();
            CurrentFoodBarUpdate();
         }
@@ -64,7 +76,7 @@ using Object = UnityEngine.Object;
         {
             foreach (var foodBar in _foodBars)
             {
-                foodBar.SetCurrentAmount();
+                foodBar.NextDay();
             }
         }
         private void ShowDisplayStatusText()

@@ -20,8 +20,18 @@ public class FoodCharacterItem : SerializedMonoBehaviour
 
         [SerializeField] private Dictionary<FoodType, Toggle> _foodToggles = new Dictionary<FoodType, Toggle>();
         
-        //TODO Item Image Show  isEatFood isEatWater
+        //TODO Item Image Show
+        //isEatFood isEatWater
+        public bool GetIsEat(FoodType foodType)
+        {
+            return _foodToggles[foodType].isOn;
+        }
 
+        //TODO UI_FoodBar All Distic.. And BackIn 
+        public void SetEatToggle(FoodType foodType,bool toggle)
+        {
+            _foodToggles[foodType].isOn = toggle;
+        }
         private void Start()
         {
             foreach (var (foodType, value) in _foodToggles)

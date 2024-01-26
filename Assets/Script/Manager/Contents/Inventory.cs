@@ -15,21 +15,32 @@ public class Inventory
         GetItemList[Item.GetName] = Item;
     }
 
-    public void AddCountableItem(Item Item, int amount)
+    public void AddCountableItem(Item item, int amount)
     {
         ICountableItem itemCountable;
-        if (!GetItemList.ContainsKey(Item.GetName))
+        if (!GetItemList.ContainsKey(item.GetName))
         {
-            GetItemList.Add(Item.GetName,Item);
-            itemCountable = (ICountableItem)Item;
+            GetItemList.Add(item.GetName,item);
+            itemCountable = (ICountableItem)item;
             itemCountable.SetAmount(amount);
             return;
         }
 
-        itemCountable =  (ICountableItem)GetItemList[Item.GetName];
+        itemCountable =  (ICountableItem)GetItemList[item.GetName];
         itemCountable.SetAmount(itemCountable.GetAmount() + amount);
     }
 
+    public void UseCountableItem(Item item, float amount)
+    {
+        ICountableItem itemCountable;
+        if (!GetItemList.ContainsKey(item.GetName))
+        {
+            return;
+        }
+
+        itemCountable = (ICountableItem)GetItemList[item.GetName];
+        itemCountable.SetAmount(itemCountable.GetAmount() - amount);
+    }
     public Item FindByItemName(string name)
     {
         if (!GetItemList.ContainsKey(name))

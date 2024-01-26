@@ -33,6 +33,18 @@ public class GameManager
         }
     }
 
+    public void UseItem(Item item, float amount = 0)
+    {
+        if (item as ICountableItem != null)
+        {
+            _inventory.UseCountableItem(item,amount);
+        }
+        else
+        {
+            //TODO Not UseCountableItem
+        }
+    }
+
     #endregion
 
     #region Day

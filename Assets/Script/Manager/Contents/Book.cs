@@ -95,7 +95,6 @@ public class Book : MonoBehaviour
         leftPagination.text = leftSide.pageToDisplay.ToString();
         rightPagination.text = rightSide.pageToDisplay.ToString();
         _maxPageCount = rightSide.textInfo.pageCount + _selectors.Count * 2;
-        Debug.Log("max : " + _maxPageCount);
     }
 
     public void PreviousPage()

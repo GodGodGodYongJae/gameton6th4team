@@ -21,9 +21,11 @@ using UnityEngine.UI;
 
         [SerializeField] private float _clickAmount;
 
+        public float GetClickAmount => _clickAmount;
         [SerializeField] private FoodType _foodType;
 
         FoodType IFoodDistribute.GetFoodType() => _foodType;
+        public FoodType GetFoodType => _foodType; 
         public string GetItemName => _itemName;
         
         private float _currentFood = 0f;
@@ -34,26 +36,17 @@ using UnityEngine.UI;
 
 
         #endregion
-
-        private Button _button;
-
-        private Action _clickAction;
-
-        private int _districbuteCurrentCount = 0;
         
-        public void SetClickAction(Action action)
-        {
-            _clickAction = action;
-        }
+        
+        private int _districbuteCurrentCount = 0;
+
         private void Awake()
         {
             _image = GetComponent<Image>();
             this.UpdateAsObservable().Select(_ => _currentFood).Subscribe(x => ShowAmountUpdate());
-            _button = this.GetOrAddComponent<Button>();
-            // _button.c.AddListener(OnChangeToggle);
         }
 
-        public void SetCurrentAmount()
+        private void SetCurrentAmount()
         {
             if (Managers.Game.GetFindByItemName(_itemName) is ICountableItem item)
             {
@@ -62,9 +55,10 @@ using UnityEngine.UI;
        
         }
 
-        private void UseItem()
+        public void NextDay()
         {
-            //TODO Manager Item Inventory sub
+            _districbuteCurrentCount = 0;
+            SetCurrentAmount();
         }
         private void DistributeItem()
         {
@@ -80,7 +74,6 @@ using UnityEngine.UI;
             }
             
             _currentFood -= _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive);
-            _clickAction?.Invoke();
         }
 
         private void CancelDistributeItem()
