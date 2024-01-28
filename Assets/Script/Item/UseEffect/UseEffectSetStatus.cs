@@ -7,6 +7,6 @@ public class UseEffectSetStatus : UseEffect
     [SerializeField] private Define.CharacterStatus characterStatus;
     public override void UseItem()
     {
-        Managers.Game.set
+        // Managers.Game.set 아이템을 썼을 때 대상? 선택은 어떻게 할레 .
     }
 }

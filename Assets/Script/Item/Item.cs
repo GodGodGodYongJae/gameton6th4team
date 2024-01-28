@@ -23,7 +23,7 @@ public abstract class Item
 
   #endregion
 
-
+  public UseEffect useEffect { get; private set; }
 
 
 }

@@ -38,26 +38,19 @@ using Object = UnityEngine.Object;
 
         private void FoodAdjustment()
         {
-            float useFoodCount = 0;
-            float useWaterCount = 0;
-            foreach (var infoItem in _characterList.Values)
-            {
-                // 이부분 사용 어마운트로 측정해야 함..
-                useFoodCount += infoItem.GetIsEat(FoodType.CanFood) ? _foodBars.First(x => x.GetFoodType == FoodType.CanFood).GetClickAmount : 0;
-                
-
-                useWaterCount += infoItem.GetIsEat(FoodType.Water) ? _foodBars.First(x => x.GetFoodType == FoodType.Water).GetClickAmount : 0;
-            }
-            Debug.Log($"사용한 Food{useFoodCount}, 사용한 Water{useWaterCount}");
-
             var canFood = Managers.Game.GetFindByItemName("CanFood");
             var water = Managers.Game.GetFindByItemName("Water");
-               
-            Managers.Game.UseItem(canFood,useFoodCount);
-            Managers.Game.UseItem(water,useWaterCount);
-            ICountableItem ifood = (ICountableItem)canFood;
-            ICountableItem iwater = (ICountableItem)water;
-            Debug.Log($"남은 Food{ifood.GetAmount()}, 남은 Water{iwater.GetAmount()}");
+            var canFoodClickAmount = _foodBars.First(x => x.GetFoodType == FoodType.CanFood).GetClickAmount;
+            var waterClickAmount = _foodBars.First(x => x.GetFoodType == FoodType.Water).GetClickAmount;
+            foreach (var infoItem in _characterList)
+            {
+                if(infoItem.Value.GetIsEat(FoodType.CanFood))
+                    Managers.Game.UseItem(canFood,infoItem.Key,canFoodClickAmount);
+                if(infoItem.Value.GetIsEat(FoodType.Water))
+                    Managers.Game.UseItem(water,infoItem.Key,waterClickAmount);
+.
+                        
+            }
         }
 
         public override void ShowCurrentDay()
