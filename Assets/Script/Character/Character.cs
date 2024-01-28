@@ -1,9 +1,10 @@
 ﻿
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : SerializedMonoBehaviour
 {
     private int _id;
     private string _name;
@@ -11,6 +12,7 @@ public class Character : MonoBehaviour
     private Sprite _sprite;
     public Sprite GetCharacterSprite => _sprite;
     
+    [SerializeField]
     private Dictionary<Define.CharacterStatus, float> _status = new Dictionary<Define.CharacterStatus, float>();
 
     public float GetStatusValue(Define.CharacterStatus status) => _status[status];

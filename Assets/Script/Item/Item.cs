@@ -23,7 +23,12 @@ public abstract class Item
 
   #endregion
 
-  public UseEffect useEffect { get; private set; }
+  protected UseEffect useEffect;
+
+  public virtual void UseItem(Character character)
+  {
+    useEffect.UseItem(character);
+  }
 
 
 }

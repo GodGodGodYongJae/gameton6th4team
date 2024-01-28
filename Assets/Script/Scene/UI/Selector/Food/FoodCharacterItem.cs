@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Script.Scene.UI.Selector.Food;
 using Sirenix.OdinInspector;
 using TMPro;
+using UniRx;
+using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +42,17 @@ public class FoodCharacterItem : SerializedMonoBehaviour
                 {
                     OnFoodToggle(foodType,value);
                 });
+                
+                // this.UpdateAsObservable()
+                //     .Select(_ => _foodToggles[foodType].isOn)
+                //     .Subscribe(_ =>
+                //     {
+                //         float alpha = _foodToggles[foodType].isOn ? 1 : 0;
+                //         var colorBlock = _foodToggles[foodType].colors;
+                //         colorBlock.colorMultiplier = 5f * alpha;
+                //     });
             }
+          
         }
 
         private void OnFoodToggle(FoodType foodType, Toggle toggle)

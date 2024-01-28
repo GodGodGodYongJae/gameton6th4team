@@ -39,10 +39,7 @@ public class Inventory
         }
 
         itemCountable = (ICountableItem)GetItemList[item.GetName];
-        for (int i = 0; i < amount; i++)
-        {
-            item.useEffect.UseItem();
-        }
+        GetItemList[item.GetName].UseItem(character);
         itemCountable.SetAmount(itemCountable.GetAmount() - amount);
     }
     public Item FindByItemName(string name)

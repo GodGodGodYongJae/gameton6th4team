@@ -1,7 +1,5 @@
 ﻿
-    using Sirenix.OdinInspector;
-
-    public abstract class UseEffect : SerializedScriptableObject
+    public abstract class UseEffect
     {
-        public abstract void UseItem();
+        public abstract void UseItem(Character useCharacter);
     }

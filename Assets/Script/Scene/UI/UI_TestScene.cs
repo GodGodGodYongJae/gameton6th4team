@@ -1,4 +1,5 @@
 ﻿
+using Script.Item.Countable;
 using Script.Manager.Contents;
 using UnityEngine;
 
@@ -37,12 +38,11 @@ public class UI_TestScene :UI_Scene
                     });
                 }
 
-                EatItem eatItemFood = new EatItem("CanFood");
+                CanFood eatItemFood = new CanFood();
                 Managers.Game.AddItem(eatItemFood,10);
+                Water water = new Water();
+                Managers.Game.AddItem(water,5);
                 
-                EatItem eatItemWater= new EatItem("Water");
-                Managers.Game.AddItem(eatItemWater,5);
-             
                 Managers.Resource.Load<GameObject>("Book", (success) =>
                 {
                      Managers.Game.Book = Object.Instantiate(success, this.transform).GetComponent<Book>();

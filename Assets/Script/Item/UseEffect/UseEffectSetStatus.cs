@@ -2,11 +2,21 @@
 
 public class UseEffectSetStatus : UseEffect
 {
-    [SerializeField] private int value;
-    [SerializeField] private Define.SetStatusAction SetStatusAction;
-    [SerializeField] private Define.CharacterStatus characterStatus;
-    public override void UseItem()
-    {
-        // Managers.Game.set 아이템을 썼을 때 대상? 선택은 어떻게 할레 .
-    }
+     private float _value;
+     private Define.SetStatusAction _setStatusAction;
+     private Define.CharacterStatus _characterStatus;
+
+     public UseEffectSetStatus(Define.SetStatusAction actionStatus, Define.CharacterStatus characterStatus, float value)
+     {
+         _value = value;
+         _setStatusAction = actionStatus;
+         _characterStatus = characterStatus;
+     }
+
+     public override void UseItem(Character useCharacter)
+     {
+         Utils.CalculateCharacterStatusValue(useCharacter, _setStatusAction, _characterStatus, _value);
+     }
+     
+     
 }

@@ -61,4 +61,23 @@ public static class Utils
     {
         return value >= minValue && value <= maxValue;
     }
+
+    public static void CalculateCharacterStatusValue(Character character, Define.SetStatusAction statusAction,Define.CharacterStatus status, float value)
+    {
+        float calculateValue = character.GetStatusValue(status);
+        switch (statusAction)
+        {
+            case Define.SetStatusAction.Add:
+            calculateValue += value;
+            break;
+            case Define.SetStatusAction.Mod:
+            calculateValue = value;
+            break;
+            case Define.SetStatusAction.Sub:
+            calculateValue -= value;
+            break;
+        }
+        character.SetStatusValue(status, calculateValue);
+    }
+
 }
