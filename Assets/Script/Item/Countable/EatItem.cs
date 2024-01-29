@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewEatItem", menuName = "Items/EatItem")]
-    public class EatItem :Item, ICountableItem
+    public class EatItem :Item
     {
-        private float _amount;
+    
 
         [SerializeField] private UseEffectSetStatus _useEffectSetStatus;
 
@@ -13,17 +13,17 @@
             base.UseItem(character);
         }
 
-        public float GetAmount()
+        public virtual float GetAmount()
         {
             return _amount;
         }
 
-        public float GetMaxAmount()
+        public  virtual float GetMaxAmount()
         {
             return 0;
         }
 
-        public void SetAmount(float amount)
+        public virtual void SetAmount(float amount)
         {
             _amount = amount;
         }

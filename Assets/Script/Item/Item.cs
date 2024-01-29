@@ -31,6 +31,23 @@ public abstract class Item : SerializedScriptableObject
     useEffect.UseItem(character);
   }
 
+  protected float _amount;
+  public virtual float GetAmount()
+  {
+    return _amount;
+  }
+
+  public virtual float GetMaxAmount()
+  {
+    //TODO
+    return 10;
+  }
+
+  public virtual void SetAmount(float amount)
+  {
+    _amount = amount;
+  }
+
 
 }
 

@@ -55,7 +55,7 @@ using UnityEngine.UI;
 
         private void SetCurrentAmount()
         {
-            if (Managers.Game.GetFindByItemName(_itemName) is ICountableItem item)
+            if (Managers.Game.GetFindByItemName(_itemName) is Item item)
             {
                 _currentFood = item.GetAmount();
             }

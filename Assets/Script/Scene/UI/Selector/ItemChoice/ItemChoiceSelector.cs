@@ -17,19 +17,17 @@
             _text.text = text;
             foreach (var itemFlag in itemFlagList)
             {
-                var item = Managers.Game.GetFindByItemName(itemFlag.itemName);
                 bool haveItem = false;
-                if (item == null)
+                var item = Managers.Game.GetFindByItemName(itemFlag.itemName);
+                if (item != null)
                 {
-                    Managers.Resource.Load<Item>(itemFlag.itemName, (success) =>
-                    {
-                        item = success;
-                        haveItem = true;
-                    });
+                    haveItem = item.GetAmount() > 0;
                 }
-                CreateItemBox(item,itemFlag.flag,haveItem);
-                //TODO
-            
+                Managers.Resource.Load<Item>(itemFlag.itemName, (success) =>
+                {
+                    item = success;
+                    CreateItemBox(item,itemFlag.flag,haveItem);
+                });
             }
         }
 

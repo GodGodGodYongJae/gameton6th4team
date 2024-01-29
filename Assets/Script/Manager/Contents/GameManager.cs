@@ -24,14 +24,9 @@ public class GameManager
 
     public void AddItem(Item item,float amount = 0)
     {
-        if (item as ICountableItem != null)
-        {
-            _inventory.AddCountableItem(item,amount);
-        }
-        else
-        {
-            _inventory.AddItem(item);
-        }
+        
+        _inventory.AddCountableItem(item,amount);
+
     }
 
     public void AddItem(string itemName, float amount = 0)
@@ -44,21 +39,17 @@ public class GameManager
 
     public void UseItem(Item item, Character character, float amount = 0)
     {
-        if (item as ICountableItem != null)
-        {
+       
             _inventory.UseCountableItem(item,amount,character);
-        }
-        else
-        {
-            //TODO Not UseCountableItem
-        }
+       
+       
     }
     
     
     public bool CheckHaveItem(string itemName, int amount)
     {
 
-        var item = (ICountableItem)GetFindByItemName(itemName);
+        var item = GetFindByItemName(itemName);
         if(item == null)
             return false;
 
