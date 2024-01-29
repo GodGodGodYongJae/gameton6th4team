@@ -192,7 +192,6 @@
       "ConditionList": [
         {
           "type" : "FlagCondition",
-          "name" : "test1",
           "flag": {
               "name": "test",
               "value" : 1
