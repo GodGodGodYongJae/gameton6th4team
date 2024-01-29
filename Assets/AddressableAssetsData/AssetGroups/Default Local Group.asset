@@ -72,6 +72,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: c4254db4dce2e2c4bb40685970550b2c
+    m_Address: YesOrNoBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cebdd18c72cca94479e4b43027aad42b, type: 2}
   m_SchemaSet:

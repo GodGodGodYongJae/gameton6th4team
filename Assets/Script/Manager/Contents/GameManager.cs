@@ -277,7 +277,7 @@ public class GameManager
     
     public void ShowYesOrNoAction(string text, Flag yesFlag, Flag noFlag)
     {
-        //TODO
+        _book.AddYesOrNoBox(text,yesFlag,noFlag);
     }
 
     #endregion

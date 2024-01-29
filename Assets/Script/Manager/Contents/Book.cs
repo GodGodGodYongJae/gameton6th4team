@@ -17,23 +17,31 @@ public class Book : MonoBehaviour
     [SerializeField] private TMP_Text rightSide;
     [Space][SerializeField] private TMP_Text leftPagination;
     [SerializeField] private TMP_Text rightPagination;
-
-    // private Image foodClicker;
-    // private Image itemClicker;
-    // private Image choiceEventClicker;
-    // private Image outEventClicker;
-
-    private List<Selector> _selectors = new List<Selector>();
+    
+    private Dictionary<string, Selector> _selectors = new Dictionary<string, Selector>();
     private int _maxPageCount;
 
-    
+    private YesOrNoSelector _yesOrNoSelector;
     private void Awake()
     {
         Managers.Resource.Load<GameObject>("FoodBox", (success) =>
         {
             var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<FoodSelector>();
-            _selectors.Add(selectorGameObject);
+            _selectors.Add("FoodBox",selectorGameObject);
         });
+        Managers.Resource.Load<GameObject>("YesOrNoBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<YesOrNoSelector>();
+            _yesOrNoSelector = selectorGameObject;
+            _yesOrNoSelector.gameObject.SetActive(false);
+        });
+    }
+
+    public void AddYesOrNoBox(string text,Flag yesFlag, Flag noFlag)
+    {
+        _yesOrNoSelector.gameObject.SetActive(true);
+      _selectors.Add("YesOrNoBox",_yesOrNoSelector);
+      _yesOrNoSelector.Init(text,yesFlag,noFlag,_selectors,NextPage);
     }
     public void AddText(string text)
     {
@@ -64,7 +72,7 @@ public class Book : MonoBehaviour
                 foreach (var selector in _selectors.Select((value, index) => new { Value = value, Index = index }))
                 {
                     int reversedIndex = pageCount - 1 - selector.Index;
-                    var currentSelector = selector.Value;
+                    var currentSelector = selector.Value.Value;
 
                     currentSelector.ShowCurrentDay();
                    
@@ -110,8 +118,17 @@ public class Book : MonoBehaviour
             ClearText();
             foreach (var selector in _selectors)
             {
-                selector.NextDay();
+                selector.Value.NextDay();
             }
+
+            if (_selectors.ContainsKey("YesOrNoBox"))
+            {
+                Selector yesOrNoBox = _selectors["YesOrNoBox"];
+                yesOrNoBox.gameObject.SetActive(false);
+                _selectors.Remove("YesOrNoBox");
+            }
+
+            EndShowSelector();
             Managers.Game.NextDay();
         }
 
@@ -129,14 +146,26 @@ public class Book : MonoBehaviour
         UpdatePagination(); //페이지표시업데이트
     }
 
+    private List<IDisposable> _disposables = new List<IDisposable>();
     private void ShowSelector(GameObject go, int currentPage)
     {
-        this.UpdateAsObservable()
+       
+        IDisposable disposable = this.UpdateAsObservable()
             .Select(_ => leftSide.pageToDisplay)
             .Subscribe(x =>
             {
                 bool active = x == currentPage;
                 go.SetActive(active);
             });
+        _disposables.Add(disposable);
+    }
+
+    private void EndShowSelector()
+    {
+        foreach (var disposable in _disposables)
+        {
+            disposable.Dispose();
+        }
+        _disposables.Clear();
     }
 }

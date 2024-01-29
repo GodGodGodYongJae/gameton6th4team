@@ -48,7 +48,19 @@
       {
         "type": "SetActiveShowCharacterStatusAction",
         "active": true
-      }
+      },
+        {
+          "type": "ShowYesOrNoAction",
+          "text" : "선택 예제  블라블라 블라블라",
+          "yesFlag": {
+            "name" : "TestFlag",
+            "value" : 1
+          },
+          "noFlag": {
+            "name" : "TestFlag",
+            "value" : 2
+          }
+        }
     ]
 
     },
@@ -208,6 +220,56 @@
           "flag": {
             "name": "test",
             "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "flag": {
+            "name": "TestFlag",
+            "value" : 1
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+          "type": "ShowTextAction",
+          "text" : "당신은 Yes를 선택했었다."
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "TestFlag",
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "flag": {
+            "name": "TestFlag",
+            "value" : 2
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+          "type": "ShowTextAction",
+          "text" : "당신은 No를 선택했었다."
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "TestFlag",
+            "value": 0
           }
         }
       ]
