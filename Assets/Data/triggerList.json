@@ -12,7 +12,7 @@
       "ActionList": [
         {
           "type": "ShowTextAction",
-          "text": "우리는 무인도에 갇혔다. 여긴 어디지??"
+          "text": "배가 침몰하기 전에 보트를 탔지만 보트가 찢어져 있는 줄은 몰랐어..\n다행이 보트도 가라앉기전에 섬이 보여서 섬으로 들어왔지\n근데 사람 사는 섬이 아닌거 같아 \n구조를 기다려야 겠지?"
         },
         {
           "type": "SetActiveShowCharacterStatusAction",

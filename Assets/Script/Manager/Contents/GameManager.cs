@@ -283,5 +283,8 @@ public class GameManager
     #endregion
 
 
-
+    public void BackGroundChange(string spriteName)
+    {
+       //TODO
+    }
 }
