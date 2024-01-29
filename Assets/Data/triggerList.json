@@ -17,6 +17,16 @@
         {
           "type": "SetActiveShowCharacterStatusAction",
           "active": false
+        },
+        {
+          "type" : "AddItemAction",
+          "itemName" : "CanFood",
+          "amount" : 3
+        },
+        {
+          "type" : "AddItemAction",
+          "itemName" : "Water",
+          "amount" : 3
         }
       ]
 

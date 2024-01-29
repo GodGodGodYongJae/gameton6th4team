@@ -1344,7 +1344,7 @@ MonoBehaviour:
     SerializationNodes: []
   _overFoodText: {fileID: 0}
   _itemName: CanFood
-  _clickAmount: 0.5
+  _clickAmount: 0.3
   _foodType: 0
 --- !u!1 &7711042309582455801
 GameObject:

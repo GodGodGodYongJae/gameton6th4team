@@ -1,7 +1,17 @@
-﻿
-    public abstract class EatItem :Item, ICountableItem
+﻿using UnityEngine;
+
+[CreateAssetMenu(fileName = "NewEatItem", menuName = "Items/EatItem")]
+    public class EatItem :Item, ICountableItem
     {
         private float _amount;
+
+        [SerializeField] private UseEffectSetStatus _useEffectSetStatus;
+
+        public override void UseItem(Character character)
+        {
+            this.useEffect = _useEffectSetStatus;
+            base.UseItem(character);
+        }
 
         public float GetAmount()
         {

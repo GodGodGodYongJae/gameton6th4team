@@ -1,5 +1,4 @@
 ﻿
-using Script.Item.Countable;
 using Script.Manager.Contents;
 using UnityEngine;
 
@@ -37,11 +36,11 @@ public class UI_TestScene :UI_Scene
                     
                     });
                 }
-
-                CanFood eatItemFood = new CanFood();
-                Managers.Game.AddItem(eatItemFood,10);
-                Water water = new Water();
-                Managers.Game.AddItem(water,0.1f);
+                //
+                // CanFood eatItemFood = new CanFood();
+                // Managers.Game.AddItem(eatItemFood,10);
+                // Water water = new Water();
+                // Managers.Game.AddItem(water,0.1f);
                 
                 Managers.Resource.Load<GameObject>("Book", (success) =>
                 {

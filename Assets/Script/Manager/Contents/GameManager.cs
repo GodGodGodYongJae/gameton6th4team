@@ -33,6 +33,14 @@ public class GameManager
         }
     }
 
+    public void AddItem(string itemName, float amount = 0)
+    {
+        Managers.Resource.Load<Item>(itemName, (success) =>
+        {
+            _inventory.AddCountableItem(success,amount);
+        });
+    }
+
     public void UseItem(Item item, Character character, float amount = 0)
     {
         if (item as ICountableItem != null)

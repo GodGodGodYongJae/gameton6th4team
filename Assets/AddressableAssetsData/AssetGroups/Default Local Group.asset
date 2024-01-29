@@ -62,6 +62,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+  - m_GUID: 6d09df563a99f57448d34d29dbba5773
+    m_Address: CanFood
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 79359d6c2d7a82444870b6d6f560ed36
+    m_Address: Water
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cebdd18c72cca94479e4b43027aad42b, type: 2}
   m_SchemaSet:
