@@ -43,17 +43,19 @@ public class FoodCharacterItem : SerializedMonoBehaviour
                     OnFoodToggle(foodType,value);
                 });
                 
-                // this.UpdateAsObservable()
-                //     .Select(_ => _foodToggles[foodType].isOn)
-                //     .Subscribe(_ =>
-                //     {
-                //         float alpha = _foodToggles[foodType].isOn ? 1 : 0;
-                //         var colorBlock = _foodToggles[foodType].colors;
-                //         colorBlock.colorMultiplier = 5f * alpha;
-                //     });
+                this.ObserveEveryValueChanged(_ => _foodToggles[foodType].isOn)
+                    .Subscribe(_ =>
+                    {
+                        float alpha = _foodToggles[foodType].isOn ? 5 : 1;
+                        var block = _foodToggles[foodType].colors;
+                        block.colorMultiplier = alpha;
+                        _foodToggles[foodType].colors = block;
+                        Debug.Log($"변경{ block.colorMultiplier} { _foodToggles[foodType].isOn}");
+                    });
             }
           
         }
+
 
         private void OnFoodToggle(FoodType foodType, Toggle toggle)
         {  
