@@ -42,6 +42,7 @@ public class FoodCharacterItem : SerializedMonoBehaviour
                 {
                     OnFoodToggle(foodType,value);
                 });
+                FoodBarMapping(foodType,value);
                 
                 this.ObserveEveryValueChanged(_ => _foodToggles[foodType].isOn)
                     .Subscribe(_ =>
@@ -57,6 +58,11 @@ public class FoodCharacterItem : SerializedMonoBehaviour
         }
 
 
+        private void FoodBarMapping(FoodType foodType, Toggle toggle)
+        {
+            var foodDistribute = _foodBarDistributes.Find(x => x.GetFoodType() == foodType);
+            foodDistribute.AddCharacterInfo(toggle);
+        }
         private void OnFoodToggle(FoodType foodType, Toggle toggle)
         {  
             var foodDistribute = _foodBarDistributes.Find(x => x.GetFoodType() == foodType);

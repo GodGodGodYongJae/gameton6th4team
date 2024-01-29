@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Script.Scene.UI.Selector.Food;
 using Sirenix.OdinInspector;
@@ -26,7 +27,6 @@ using UnityEngine.UI;
 
         FoodType IFoodDistribute.GetFoodType() => _foodType;
         public FoodType GetFoodType => _foodType; 
-        public string GetItemName => _itemName;
         
         private float _currentFood = 0f;
 
@@ -34,16 +34,23 @@ using UnityEngine.UI;
 
         private const float MaxValue = 6.0f;
 
+        private Button _button;
 
         #endregion
-        
-        
-        private int _districbuteCurrentCount = 0;
+
 
         private void Awake()
         {
             _image = GetComponent<Image>();
             this.ObserveEveryValueChanged(_=> _currentFood).Subscribe(x => ShowAmountUpdate());
+            _button = Utils.GetOrAddComponent<Button>(this.gameObject);
+            _button.onClick.AddListener(() =>
+            {
+                if(_isDistribute)
+                    OnBackIn();
+                else
+                    OnDistribute();
+            });
         }
 
         private void SetCurrentAmount()
@@ -57,56 +64,66 @@ using UnityEngine.UI;
 
         public void NextDay()
         {
-            _districbuteCurrentCount = 0;
             SetCurrentAmount();
         }
-        private void DistributeItem()
-        {
-            if (Managers.Game.Characters.Count(character => character.GetIsAlive) <= _districbuteCurrentCount)
-            {
-                CancelDistributeItem();
-                return;
-            }
-            
-            if ( _currentFood < _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive))
-            {
-                return;
-            }
-            
-            _currentFood -= _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive);
-        }
-
-        private void CancelDistributeItem()
-        {
-            if (_districbuteCurrentCount == 0)
-            {
-                DistributeItem();
-                return;
-            }
-            _currentFood += _clickAmount * Managers.Game.Characters.Count(character => character.GetIsAlive);
-            _districbuteCurrentCount = 0;
-        }
+      
         private void ShowAmountUpdate()
         {
             _image.fillAmount = _currentFood / MaxValue;
         }
 
+
+
+  
+        #region Toggle
         public bool CheckFoodDistribute()
         {
             return _currentFood - _clickAmount >= 0;
         }
-
         public void CharacterFoodDistribute()
         {
-
-            
-            _districbuteCurrentCount++;
             _currentFood -= _clickAmount;
         }
 
         public void CharacterFoodBackIn()
         {
-            _districbuteCurrentCount--;
             _currentFood += _clickAmount;
         }
+
+        private List<Toggle> _toggles = new List<Toggle>();
+        public void AddCharacterInfo(Toggle toggle)
+        {
+            _toggles.Add(toggle);
+        }
+
+        private bool _isDistribute = false;
+        private void OnDistribute()
+        {
+            var onToggles = _toggles.FindAll(x => !x.isOn);
+           
+            if (onToggles.Count * _clickAmount > _currentFood)
+                return;
+            
+            foreach (var t in onToggles)
+            {
+                t.isOn = true;
+                CharacterFoodDistribute();
+            }
+
+            _isDistribute = true;
+        }
+
+        private void OnBackIn()
+        {
+            var onToggles = _toggles.FindAll(x => x.isOn);
+            foreach (var t in onToggles)
+            {
+                t.isOn = false;
+                CharacterFoodBackIn();
+            }
+
+            _isDistribute = false;
+        }
+        #endregion
+  
     }
