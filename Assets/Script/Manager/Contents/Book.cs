@@ -34,21 +34,7 @@ public class Book : MonoBehaviour
             var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<FoodSelector>();
             _selectors.Add(selectorGameObject);
         });
-
-        // foodClicker = GameObject.Find("Food").GetComponent<Image>();
-        // itemClicker = GameObject.Find("ItemChoice").GetComponent<Image>();
-        // choiceEventClicker = GameObject.Find("ChoiceEvent").GetComponent<Image>();
-        // outEventClicker = GameObject.Find("Outevent").GetComponent<Image>();
     }
-
-    private void Start()
-    {
-        // foodClicker.gameObject.SetActive(false);
-        // itemClicker.gameObject.SetActive(false);
-        // choiceEventClicker.gameObject.SetActive(false);
-        // outEventClicker.gameObject.SetActive(false);
-    }
-
     public void AddText(string text)
     {
         content += text;
@@ -81,8 +67,10 @@ public class Book : MonoBehaviour
                     var currentSelector = selector.Value;
 
                     currentSelector.ShowCurrentDay();
-                    Debug.Log(_maxPageCount - 2 * reversedIndex);
-                    ShowSelector(currentSelector.gameObject, _maxPageCount - 2 * reversedIndex); // 역순으로 계산
+                   
+                    int result = _maxPageCount - 2 * reversedIndex - (_maxPageCount >= 2 && _maxPageCount % 2 == 0 ? 1 : 0);
+                    Debug.Log($"{result} Show Page");
+                    ShowSelector(currentSelector.gameObject, result); // 역순으로 계산
                 }
                 
             });

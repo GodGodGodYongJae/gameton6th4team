@@ -44,6 +44,17 @@ public class GameManager
             //TODO Not UseCountableItem
         }
     }
+    
+    
+    public bool CheckHaveItem(string itemName, int amount)
+    {
+
+        var item = (ICountableItem)GetFindByItemName(itemName);
+        if(item == null)
+            return false;
+
+        return item.GetAmount() >= amount;
+    }
 
     #endregion
 
@@ -265,9 +276,4 @@ public class GameManager
 
 
 
-    public bool CheckHaveItem(int itemId, int amount)
-    {
-      //TODO
-      return false;
-    }
 }
