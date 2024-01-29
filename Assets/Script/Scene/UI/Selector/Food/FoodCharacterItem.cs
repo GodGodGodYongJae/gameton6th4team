@@ -60,14 +60,23 @@ public class FoodCharacterItem : SerializedMonoBehaviour
         private void OnFoodToggle(FoodType foodType, Toggle toggle)
         {  
             var foodDistribute = _foodBarDistributes.Find(x => x.GetFoodType() == foodType);
-            if (toggle.isOn)
+
+            if (foodDistribute.CheckFoodDistribute())
             {
-                foodDistribute.CharacterFoodDistribute();
+                if (toggle.isOn)
+                {
+                    foodDistribute.CharacterFoodDistribute();
+                }
+                else 
+                {
+                    foodDistribute.CharacterFoodBackIn();
+                }
             }
             else
             {
-                foodDistribute.CharacterFoodBackIn();
+                toggle.isOn = false;
             }
+      
 
         }
         public void SetFoodBarDistribute(List<IFoodDistribute> foodDistributes)

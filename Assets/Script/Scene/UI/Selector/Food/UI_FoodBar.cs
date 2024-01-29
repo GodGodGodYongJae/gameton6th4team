@@ -43,7 +43,7 @@ using UnityEngine.UI;
         private void Awake()
         {
             _image = GetComponent<Image>();
-            this.UpdateAsObservable().Select(_ => _currentFood).Subscribe(x => ShowAmountUpdate());
+            this.ObserveEveryValueChanged(_=> _currentFood).Subscribe(x => ShowAmountUpdate());
         }
 
         private void SetCurrentAmount()
@@ -91,10 +91,15 @@ using UnityEngine.UI;
             _image.fillAmount = _currentFood / MaxValue;
         }
 
-
+        public bool CheckFoodDistribute()
+        {
+            return _currentFood - _clickAmount >= 0;
+        }
 
         public void CharacterFoodDistribute()
         {
+
+            
             _districbuteCurrentCount++;
             _currentFood -= _clickAmount;
         }

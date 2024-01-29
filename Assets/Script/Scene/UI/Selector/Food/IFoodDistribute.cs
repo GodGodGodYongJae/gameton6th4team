@@ -6,4 +6,5 @@
         public FoodType GetFoodType();
         public void CharacterFoodDistribute();
         public void CharacterFoodBackIn();
+        public bool CheckFoodDistribute();
     }

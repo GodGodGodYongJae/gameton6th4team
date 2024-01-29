@@ -21,7 +21,7 @@ public class GameManager
         return _inventory.FindByItemName(name);
     }
 
-    public void AddItem(Item item,int amount = 0)
+    public void AddItem(Item item,float amount = 0)
     {
         if (item as ICountableItem != null)
         {

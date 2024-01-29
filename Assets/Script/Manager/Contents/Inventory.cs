@@ -15,7 +15,7 @@ public class Inventory
         GetItemList[Item.GetName] = Item;
     }
 
-    public void AddCountableItem(Item item, int amount)
+    public void AddCountableItem(Item item, float amount)
     {
         ICountableItem itemCountable;
         if (!GetItemList.ContainsKey(item.GetName))
