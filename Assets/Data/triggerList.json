@@ -101,6 +101,7 @@
         },
         {
           "type": "ShowItemChoiceAction",
+          "text": "목도 마르고 배도 고파 뭘 먹지?",
           "itemFlagList": [
             {
               "itemName" : "CanFood",
