@@ -17,13 +17,11 @@
         private Flag _trueFlag;
         private Flag _falseFlag;
         private bool _isSelectTrueFlag;
-        private Dictionary<string, Selector> _selectors;
-        public void Init(string text, Flag trueFlag, Flag falseFlag,Dictionary<string,Selector> selectors,Action nextPageAction)
+        public void Init(string text, Flag trueFlag, Flag falseFlag, Action nextPageAction)
         {
             _text.text = text;
             _trueFlag = trueFlag;
             _falseFlag = falseFlag;
-            _selectors = selectors;
             
             _yesButton.onClick.AddListener(() =>
             {

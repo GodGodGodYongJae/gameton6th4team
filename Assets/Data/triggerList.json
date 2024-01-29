@@ -21,7 +21,7 @@
         {
           "type" : "AddItemAction",
           "itemName" : "CanFood",
-          "amount" : 3
+          "amount" : 0
         },
         {
           "type" : "AddItemAction",
@@ -103,92 +103,23 @@
           "text": "Success is not final, failure is not fatal: It is the courage to continue that counts."
         },
         {
-          "type": "ShowTextAction",
-          "text": "The purpose of our lives is to be happy."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "You only live once, but if you do it right, once is enough."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Be the change that you wish to see in the world."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The best way to predict the future is to create it."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Don't watch the clock; do what it does. Keep going."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The only way to do great work is to love what you do."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Believe you can and you're halfway there."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Your time is limited, don't waste it living someone else's life."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The journey of a thousand miles begins with one step."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Simplicity is the ultimate sophistication."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Strive not to be a success, but rather to be of value."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "I find that the harder I work, the more luck I seem to have."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "You miss 100% of the shots you don't take."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "It does not matter how slowly you go as long as you do not stop."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Life is what happens when you're busy making other plans."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The only person you are destined to become is the person you decide to be."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The future belongs to those who believe in the beauty of their dreams."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking.Do not wait to strike till the iron is hot, but make it hot by striking."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice.The best revenge is to be unlike him who performed the injustice."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The only way to do great work is to love what you do."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Believe you can and you're halfway there."
+          "type": "ShowItemChoiceAction",
+          "itemFlagList": [
+            {
+              "itemName" : "CanFood",
+              "flag": {
+                "name": "EatFlag",
+                "value" : 1
+              }
+            },
+            {
+              "itemName" : "Water",
+              "flag": {
+                "name": "WaterFlag",
+                "value" : 1
+              }
+            }
+          ]
         },
         {
           "type": "SetFlag",
@@ -269,6 +200,56 @@
           "type": "SetFlag",
           "flag": {
             "name": "TestFlag",
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "flag": {
+            "name": "EatFlag",
+            "value" : 1
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+          "type": "ShowTextAction",
+          "text" : "당신은 음식을 선택했다."
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "EatFlag",
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "flag": {
+            "name": "WaterFlag",
+            "value" : 1
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+          "type": "ShowTextAction",
+          "text" : "당신은 물을 선택했다."
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "WaterFlag",
             "value": 0
           }
         }

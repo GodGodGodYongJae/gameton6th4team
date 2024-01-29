@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Script.TriggerSystem;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
@@ -22,6 +23,7 @@ public class Book : MonoBehaviour
     private int _maxPageCount;
 
     private YesOrNoSelector _yesOrNoSelector;
+    private ItemChoiceSelector _itemChoiceSelector;
     private void Awake()
     {
         Managers.Resource.Load<GameObject>("FoodBox", (success) =>
@@ -35,13 +37,28 @@ public class Book : MonoBehaviour
             _yesOrNoSelector = selectorGameObject;
             _yesOrNoSelector.gameObject.SetActive(false);
         });
+        Managers.Resource.Load<GameObject>("ItemChoiceBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<ItemChoiceSelector>();
+            _itemChoiceSelector = selectorGameObject;
+            _itemChoiceSelector.gameObject.SetActive(false);
+        });
+       
     }
 
     public void AddYesOrNoBox(string text,Flag yesFlag, Flag noFlag)
-    {
+    { 
         _yesOrNoSelector.gameObject.SetActive(true);
       _selectors.Add("YesOrNoBox",_yesOrNoSelector);
-      _yesOrNoSelector.Init(text,yesFlag,noFlag,_selectors,NextPage);
+      _yesOrNoSelector.Init(text,yesFlag,noFlag,NextPage);
+    }
+    
+    public void AddItemChoiceBox(string text, List<ItemFlag> itemFlagList)
+    {
+        //TODO
+        _itemChoiceSelector.gameObject.SetActive(true);
+        _selectors.Add("ItemChoiceBox",_itemChoiceSelector);
+        _itemChoiceSelector.Init(text, itemFlagList,NextPage);
     }
     public void AddText(string text)
     {
@@ -110,6 +127,23 @@ public class Book : MonoBehaviour
 
         UpdatePagination(); //페이지표시업데이트
     }
+
+    private void SelectorDisable()
+    {
+        if (_selectors.ContainsKey("YesOrNoBox"))
+        {
+            Selector yesOrNoBox = _selectors["YesOrNoBox"];
+            yesOrNoBox.gameObject.SetActive(false);
+            _selectors.Remove("YesOrNoBox");
+        }
+
+        if (_selectors.ContainsKey("ItemChoiceBox"))
+        {
+            Selector itemChoiceBox = _selectors["ItemChoiceBox"];
+            itemChoiceBox.gameObject.SetActive(false);
+            _selectors.Remove("ItemChoiceBox");
+        }
+    }
     public void NextPage()
     {
       
@@ -121,12 +155,7 @@ public class Book : MonoBehaviour
                 selector.Value.NextDay();
             }
 
-            if (_selectors.ContainsKey("YesOrNoBox"))
-            {
-                Selector yesOrNoBox = _selectors["YesOrNoBox"];
-                yesOrNoBox.gameObject.SetActive(false);
-                _selectors.Remove("YesOrNoBox");
-            }
+            SelectorDisable();
 
             EndShowSelector();
             Managers.Game.NextDay();
@@ -168,4 +197,6 @@ public class Book : MonoBehaviour
         }
         _disposables.Clear();
     }
+
+
 }

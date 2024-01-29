@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.Manager.Contents;
+using Script.TriggerSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -286,5 +287,10 @@ public class GameManager
     public void BackGroundChange(string spriteName)
     {
        //TODO
+    }
+
+    public void ShowItemChoice(string text, List<ItemFlag> itemFlagList)
+    {
+        _book.AddItemChoiceBox(text, itemFlagList);
     }
 }
