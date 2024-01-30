@@ -5,6 +5,7 @@ using Script.Manager.Contents;
 using Script.TriggerSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager
 {
@@ -41,8 +42,6 @@ public class GameManager
     {
        
             _inventory.UseCountableItem(item,amount,character);
-       
-       
     }
     
     
@@ -73,7 +72,7 @@ public class GameManager
         //ShowCharacterStatus.
       
         CurrentDay++;
-
+        FadeInOut();
         _triggerEvent.StartTrigger(()=>
         {
             if (_activeShowStatus)
@@ -284,4 +283,19 @@ public class GameManager
     {
         _book.AddItemChoiceBox(text, itemFlagList);
     }
+
+    #region FadeInOut
+
+    private UI_Fade _fadeUI;
+
+    public void SetFadeUI(UI_Fade fade)
+    { 
+        _fadeUI = fade;
+    }
+    private void FadeInOut(float duration = 1.0f)
+    {
+        _fadeUI.FadeIn(CurrentDay,duration);
+    }
+
+    #endregion
 }

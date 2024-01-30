@@ -11,34 +11,36 @@
         [SerializeField]
         private TMP_Text _dayText;
         private Image _image;
-
-        private float _time;
+        private Sequence sequence;
+        private float _time = 1.0f;
         private void Awake()
         {
             _image = GetComponent<Image>();
-        }
-
-        private void Start()
-        {
-            Sequence sequence = DOTween.Sequence()
-                .SetAutoKill(false)
-                .OnRewind(() =>
-                {
-                    _image.enabled = true;
-                })
-                .Append(_image.DOFade(1.0f, _time))
-                .Append(_image.DOFade(0.0f, _time))
-                .OnComplete(() =>
-                {
-                    _image.enabled = false;
-                });
+            Managers.Game.SetFadeUI(this);
+            sequence = DOTween.Sequence()
+                    .SetAutoKill(false)
+                    .OnRewind(() =>
+                    {
+                        this.GetComponent<RectTransform>().SetAsLastSibling();
+                        _image.raycastTarget = true;
+                    })
+                    .Append(_image.DOFade(1.0f, _time))
+                    .Join(_dayText.DOFade(1.0f, _time))
+                    .Append(_image.DOFade(0.0f, _time))
+                    .Join(_dayText.DOFade(0.0f, _time)).
+                    SetEase(Ease.InQuad)
+                    .OnComplete(() =>
+                    {
+                        _image.raycastTarget = false;
+                    })
+                ;
         }
 
         public void FadeIn(int currentDay, float time = 1.0f)
         {
-            _dayText.text = $"{currentDay} + 일" ;
+            _dayText.text = $"{currentDay} 일" ;
             _time = time;
-            _image.enabled = true;
+            sequence.Restart();
         }
 
         public void FadeOut()
