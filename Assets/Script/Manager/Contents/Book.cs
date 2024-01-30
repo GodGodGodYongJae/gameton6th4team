@@ -1,12 +1,15 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Script.TriggerSystem;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class Book : MonoBehaviour
 {
@@ -15,30 +18,48 @@ public class Book : MonoBehaviour
     [SerializeField] private TMP_Text rightSide;
     [Space][SerializeField] private TMP_Text leftPagination;
     [SerializeField] private TMP_Text rightPagination;
-
-    private Image foodClicker;
-    private Image itemClicker;
-    private Image choiceEventClicker;
-    private Image outEventClicker;
-
+    
+    private Dictionary<string, Selector> _selectors = new Dictionary<string, Selector>();
     private int _maxPageCount;
 
+    private YesOrNoSelector _yesOrNoSelector;
+    private ItemChoiceSelector _itemChoiceSelector;
     private void Awake()
     {
-        foodClicker = GameObject.Find("Food").GetComponent<Image>();
-        itemClicker = GameObject.Find("ItemChoice").GetComponent<Image>();
-        choiceEventClicker = GameObject.Find("ChoiceEvent").GetComponent<Image>();
-        outEventClicker = GameObject.Find("Outevent").GetComponent<Image>();
+        Managers.Resource.Load<GameObject>("FoodBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<FoodSelector>();
+            _selectors.Add("FoodBox",selectorGameObject);
+        });
+        Managers.Resource.Load<GameObject>("YesOrNoBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<YesOrNoSelector>();
+            _yesOrNoSelector = selectorGameObject;
+            _yesOrNoSelector.gameObject.SetActive(false);
+        });
+        Managers.Resource.Load<GameObject>("ItemChoiceBox", (success) =>
+        {
+            var selectorGameObject = Object.Instantiate(success, this.transform.parent).GetComponent<ItemChoiceSelector>();
+            _itemChoiceSelector = selectorGameObject;
+            _itemChoiceSelector.gameObject.SetActive(false);
+        });
+       
     }
 
-    private void Start()
+    public void AddYesOrNoBox(string text,Flag yesFlag, Flag noFlag)
+    { 
+        _yesOrNoSelector.gameObject.SetActive(true);
+      _selectors.Add("YesOrNoBox",_yesOrNoSelector);
+      _yesOrNoSelector.Init(text,yesFlag,noFlag,NextPage);
+    }
+    
+    public void AddItemChoiceBox(string text, List<ItemFlag> itemFlagList)
     {
-        foodClicker.gameObject.SetActive(false);
-        itemClicker.gameObject.SetActive(false);
-        choiceEventClicker.gameObject.SetActive(false);
-        outEventClicker.gameObject.SetActive(false);
+        //TODO
+        _itemChoiceSelector.gameObject.SetActive(true);
+        _selectors.Add("ItemChoiceBox",_itemChoiceSelector);
+        _itemChoiceSelector.Init(text, itemFlagList,NextPage);
     }
-
     public void AddText(string text)
     {
         content += text;
@@ -64,45 +85,31 @@ public class Book : MonoBehaviour
             .Subscribe(x =>
             {
                 UpdatePagination();
-                ShowSelector(foodClicker, _maxPageCount - 4);
-                ShowSelector(itemClicker, _maxPageCount - 2);
-                ShowSelector(choiceEventClicker, _maxPageCount);
+                int pageCount = _selectors.Count;
+                foreach (var selector in _selectors.Select((value, index) => new { Value = value, Index = index }))
+                {
+                    int reversedIndex = pageCount - 1 - selector.Index;
+                    var currentSelector = selector.Value.Value;
+
+                    currentSelector.ShowCurrentDay();
+                   
+                    int result = _maxPageCount - 2 * reversedIndex - (_maxPageCount >= 2 && _maxPageCount % 2 == 0 ? 1 : 0);
+                    Debug.Log($"{result} Show Page");
+                    ShowSelector(currentSelector.gameObject, result); // 역순으로 계산
+                }
                 
             });
 
     }
-    
-    private void FoodclickerOn()
-    {
-        foodClicker.gameObject.SetActive(true);
-    }
 
-    public void EndFoodClicker()
-    {
-        //foodClicker.gameObject.SetActive(false);
-        //이다음에 이벤트가 발생하면 다음 클리커 연결
-        ClearText();
-        Managers.Game.NextDay();
-    }
-    public void PreviousPageFood()
-    {
-        foodClicker.gameObject.SetActive(false);
-        leftSide.pageToDisplay -=2; //왼쪽은 마지막페이지+1로 설정
-        rightSide.pageToDisplay = leftSide.pageToDisplay + 1; //오른쪽은 왼쪽보다+1된 값으로 설정
-        UpdatePagination();
-    }
 
     private void UpdatePagination()
     {
         leftPagination.text = leftSide.pageToDisplay.ToString();
         rightPagination.text = rightSide.pageToDisplay.ToString();
-        _maxPageCount = rightSide.textInfo.pageCount + 6;
-        Debug.Log("max : " + _maxPageCount);
+        _maxPageCount = rightSide.textInfo.pageCount + _selectors.Count * 2;
     }
 
-
-
-    // Click Event (여기서 문제는 맨 마지막 페이지에 해당 콘텐츠가 노출됬을 경우 등등.. 생각해봐야 함 
     public void PreviousPage()
     {
         if (leftSide.pageToDisplay < 1) //0페이지는 1페이지로 표시
@@ -120,12 +127,37 @@ public class Book : MonoBehaviour
 
         UpdatePagination(); //페이지표시업데이트
     }
+
+    private void SelectorDisable()
+    {
+        if (_selectors.ContainsKey("YesOrNoBox"))
+        {
+            Selector yesOrNoBox = _selectors["YesOrNoBox"];
+            yesOrNoBox.gameObject.SetActive(false);
+            _selectors.Remove("YesOrNoBox");
+        }
+
+        if (_selectors.ContainsKey("ItemChoiceBox"))
+        {
+            Selector itemChoiceBox = _selectors["ItemChoiceBox"];
+            itemChoiceBox.gameObject.SetActive(false);
+            _selectors.Remove("ItemChoiceBox");
+        }
+    }
     public void NextPage()
     {
       
         if (rightSide.pageToDisplay >= _maxPageCount) //rightSide.textInfo.pageCount 이미 마지막페이지라면 넘어가지 않음
         {
             ClearText();
+            foreach (var selector in _selectors)
+            {
+                selector.Value.NextDay();
+            }
+
+            SelectorDisable();
+
+            EndShowSelector();
             Managers.Game.NextDay();
         }
 
@@ -143,14 +175,28 @@ public class Book : MonoBehaviour
         UpdatePagination(); //페이지표시업데이트
     }
 
-    private void ShowSelector(Image image,int currentPage)
+    private List<IDisposable> _disposables = new List<IDisposable>();
+    private void ShowSelector(GameObject go, int currentPage)
     {
-        this.UpdateAsObservable()
+       
+        IDisposable disposable = this.UpdateAsObservable()
             .Select(_ => leftSide.pageToDisplay)
             .Subscribe(x =>
             {
                 bool active = x == currentPage;
-                image.gameObject.SetActive(active);
+                go.SetActive(active);
             });
+        _disposables.Add(disposable);
     }
+
+    private void EndShowSelector()
+    {
+        foreach (var disposable in _disposables)
+        {
+            disposable.Dispose();
+        }
+        _disposables.Clear();
+    }
+
+
 }

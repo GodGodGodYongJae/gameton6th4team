@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.Manager.Contents;
+using Script.TriggerSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager
 {
@@ -16,16 +18,41 @@ public class GameManager
         return _inventory.GetItemList.Values.ToList();
     }
 
-    public void AddItem(Item item,int amount = 0)
+    public Item GetFindByItemName(string name)
     {
-        if (item as ICountableItem != null)
+        return _inventory.FindByItemName(name);
+    }
+
+    public void AddItem(Item item,float amount = 0)
+    {
+        
+        _inventory.AddCountableItem(item,amount);
+
+    }
+
+    public void AddItem(string itemName, float amount = 0)
+    {
+        Managers.Resource.Load<Item>(itemName, (success) =>
         {
-            _inventory.AddCountableItem(item,amount);
-        }
-        else
-        {
-            _inventory.AddItem(item);
-        }
+            _inventory.AddCountableItem(success,amount);
+        });
+    }
+
+    public void UseItem(Item item, Character character, float amount = 0)
+    {
+       
+            _inventory.UseCountableItem(item,amount,character);
+    }
+    
+    
+    public bool CheckHaveItem(string itemName, int amount)
+    {
+
+        var item = GetFindByItemName(itemName);
+        if(item == null)
+            return false;
+
+        return item.GetAmount() >= amount;
     }
 
     #endregion
@@ -45,7 +72,7 @@ public class GameManager
         //ShowCharacterStatus.
       
         CurrentDay++;
-
+        FadeInOut();
         _triggerEvent.StartTrigger(()=>
         {
             if (_activeShowStatus)
@@ -100,7 +127,7 @@ public class GameManager
         foreach (var character in Characters)
         {
             character.StatusText.Clear();
-            character.DisplaySatus.Clear();
+            character.DisplayStatusText.Clear();
         }
     }
     private void ShowCharacterText()
@@ -137,7 +164,7 @@ public class GameManager
                 if (Utils.InRange(character.GetStatusValue(checkStatus),checkMinValue,checkMaxValue) )
                 {
                     character.StatusText.Add(character.GetName() + noteText);
-                    character.DisplaySatus.Add(displayText);
+                    character.DisplayStatusText.Add(displayText);
                     
                 }
              
@@ -241,16 +268,34 @@ public class GameManager
     
     public void ShowYesOrNoAction(string text, Flag yesFlag, Flag noFlag)
     {
-        //TODO
+        _book.AddYesOrNoBox(text,yesFlag,noFlag);
     }
 
     #endregion
 
 
-
-    public bool CheckHaveItem(int itemId, int amount)
+    public void BackGroundChange(string spriteName)
     {
-      //TODO
-      return false;
+       //TODO
     }
+
+    public void ShowItemChoice(string text, List<ItemFlag> itemFlagList)
+    {
+        _book.AddItemChoiceBox(text, itemFlagList);
+    }
+
+    #region FadeInOut
+
+    private UI_Fade _fadeUI;
+
+    public void SetFadeUI(UI_Fade fade)
+    { 
+        _fadeUI = fade;
+    }
+    private void FadeInOut(float duration = 1.0f)
+    {
+        _fadeUI.FadeIn(CurrentDay,duration);
+    }
+
+    #endregion
 }
