@@ -51,7 +51,6 @@ public class FoodCharacterItem : SerializedMonoBehaviour
                         var block = _foodToggles[foodType].colors;
                         block.colorMultiplier = alpha;
                         _foodToggles[foodType].colors = block;
-                        Debug.Log($"변경{ block.colorMultiplier} { _foodToggles[foodType].isOn}");
                     });
             }
           

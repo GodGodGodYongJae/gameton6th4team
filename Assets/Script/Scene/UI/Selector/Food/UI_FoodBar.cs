@@ -107,7 +107,6 @@ using UnityEngine.UI;
             foreach (var t in onToggles)
             {
                 t.isOn = true;
-                CharacterFoodDistribute();
             }
 
             _isDistribute = true;
@@ -116,10 +115,10 @@ using UnityEngine.UI;
         private void OnBackIn()
         {
             var onToggles = _toggles.FindAll(x => x.isOn);
+            Debug.Log($"{onToggles.Count()} Count!!");
             foreach (var t in onToggles)
             {
                 t.isOn = false;
-                CharacterFoodBackIn();
             }
 
             _isDistribute = false;
