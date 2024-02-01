@@ -11,8 +11,38 @@
           ],
           "ActionList": [
             {
+              "type": "SetBackGroundAction",
+              "imageName" : "BackGround02"
+            },
+            {
               "type": "ShowTextAction",
               "text": "배가 침몰하기 전에 보트를 탔지만 보트가 찢어져 있는 줄은 몰랐어..\n다행이 보트도 가라앉기전에 섬이 보여서 섬으로 들어왔지\n근데 사람 사는 섬이 아닌거 같아 \n구조를 기다려야 겠지?\n\n이 식량으로 얼마나 버틸 수 있을까? \n정안되면 섬 내부로 들어가야 될거 같아"
+            },
+            { 
+              "type": "AddItemAction",
+              "itemName": "CanFood",
+              "amount" : 5
+            },
+            {
+              "type": "AddItemAction",
+              "itemName": "Water",
+              "amount" : 5
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ConditionList" : [
+            {
+              "type" : "DayCondition",
+              "startDay" : 2,
+              "endDay" : 2
+            }
+          ],
+          "ActionList": [
+            {
+              "type": "SetActiveShowCharacterStatusAction",
+              "active" : true
             }
           ]
         },

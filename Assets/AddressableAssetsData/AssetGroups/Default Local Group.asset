@@ -82,13 +82,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-  - m_GUID: 1efb21ecc3e676c418306d8fed3065e7
-    m_Address: GreenGem.sprite
+  - m_GUID: e17a025c7c820ac4b941e618b4401d68
+    m_Address: BackGround02.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
   - m_GUID: 9addd0bf2cfc82849bac6aff028deac4
     m_Address: BackGround.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 560bb7e5f3289ab488671c434640af0a
+    m_Address: 1.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 0d7189c9b0c7cab41adf07ff474a6edc
+    m_Address: 2.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 9417f8685491f9b40a174cd5f9339724
+    m_Address: 3.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

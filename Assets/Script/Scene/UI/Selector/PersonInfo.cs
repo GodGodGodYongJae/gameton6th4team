@@ -7,19 +7,16 @@ using UnityEngine.UI;
 
     public class PersonInfo : MonoBehaviour
     {
-            private Sprite _portraitSprite;
-            private Action _clickAction;
+            private Image _portraitSprite;
 
-            public void SetPersonInfo(Sprite image,Action clickCallback = null)
+            private void Awake()
             {
-                _portraitSprite = image;
-                _clickAction = clickCallback;
-                this.UpdateAsObservable()
-                    .Select(_ => _clickAction)
-                    .Subscribe(callbackEvent =>
-                    {
-                        callbackEvent?.Invoke();
-                    });
+                _portraitSprite = GetComponent<Image>();
+            }
+
+            public void SetPersonInfo(Sprite image)
+            {
+                _portraitSprite.sprite = image;
             }
 
     }

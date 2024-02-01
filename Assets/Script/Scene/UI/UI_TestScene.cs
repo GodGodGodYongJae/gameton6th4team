@@ -9,6 +9,7 @@ public class UI_TestScene :UI_Scene
         if (base.Init() == false)
             return false;
         
+        Managers.Game.SetUiCanvas(this.gameObject);
         PreResourceLoad();
         return true;
     }
@@ -26,15 +27,21 @@ public class UI_TestScene :UI_Scene
                 Debug.Log("end");
                 isPreload = true;
 
-                for (int i = 0; i < 3; i++)
+                string[] characterNames = { "소피아", "제이슨", "피터" };
+                for (int i= 1; i < 4; i++)
                 {
+                 
                     Managers.Resource.Load<GameObject>("Character", (success) =>
                     {
                         Character character = Object.Instantiate(success).GetComponent<Character>();
-                        character.SetName("Test"+i);
+                        character.SetName(characterNames[i-1]);
+                        Managers.Resource.Load<Sprite>($"{i}.sprite", (spriteSuccess) =>
+                        {
+                            character.SetPortrait(spriteSuccess);
+                        });
                         Managers.Game.AddCharacter(character);
                     
-                    });
+                    });   
                 }
                 //
                 // CanFood eatItemFood = new CanFood();

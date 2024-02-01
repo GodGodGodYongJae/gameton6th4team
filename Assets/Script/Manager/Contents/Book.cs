@@ -98,7 +98,7 @@ public class Book : MonoBehaviour
                 }
                 
             });
-
+       Managers.Game.CloseUiCanvas();
     }
 
 

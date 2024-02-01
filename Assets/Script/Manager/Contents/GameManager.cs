@@ -321,4 +321,22 @@ public class GameManager
     #endregion
 
 
+    #region UICanvas Controller
+
+    private GameObject _uiCanvas;
+    public void SetUiCanvas(GameObject gameObject) => _uiCanvas = gameObject;
+
+
+    public void CloseUiCanvas()
+    {
+        _uiCanvas.SetActive(false);
+    }
+
+    public void OnUiCanvas()
+    {
+        _uiCanvas.SetActive(true);
+    }
+    
+    #endregion
+
 }

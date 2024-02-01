@@ -23,6 +23,7 @@ using Object = UnityEngine.Object;
                 {
                     var infoItem = Object.Instantiate(success, _characterContent.transform).GetComponent<FoodCharacterItem>();
                     infoItem.SetFoodBarDistribute(_foodBars.Select(bar => (IFoodDistribute)bar).ToList());
+                    infoItem.SetPersonInfoSprite(character.GetCharacterPortrait);
                      _characterList.Add(character,infoItem);
                 });
             }

@@ -11,6 +11,11 @@ public class Character : SerializedMonoBehaviour
     private bool _isAlive;
     private Sprite _sprite;
     public Sprite GetCharacterSprite => _sprite;
+    private Sprite _portrait;
+
+    public Sprite GetCharacterPortrait => _portrait;
+    public void SetPortrait(Sprite sprite) => _portrait = sprite;
+    
     
     [SerializeField]
     private Dictionary<Define.CharacterStatus, float> _status = new Dictionary<Define.CharacterStatus, float>();
