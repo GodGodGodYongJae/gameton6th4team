@@ -146,7 +146,7 @@ public class ResourceManager
             int loadCount = 0;
 
             int totalCount = op.Result.Count;
-            string[] spriteObjs = { ".sprite", ".multiplesprite", ".png", ".jpg" };
+            string[] spriteObjs = { ".sprite", ".multiplesprite", ".png", ".jpg",".jpeg" };
 
 
             foreach (var result in op.Result)

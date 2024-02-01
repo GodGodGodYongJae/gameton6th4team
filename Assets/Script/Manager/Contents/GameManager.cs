@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.Manager.Contents;
+using Script.Scene.Game;
 using Script.TriggerSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class GameManager
 {
@@ -274,10 +276,6 @@ public class GameManager
     #endregion
 
 
-    public void BackGroundChange(string spriteName)
-    {
-       //TODO
-    }
 
     public void ShowItemChoice(string text, List<ItemFlag> itemFlagList)
     {
@@ -298,4 +296,28 @@ public class GameManager
     }
 
     #endregion
+
+
+    #region InGameSprite
+
+    private GameBackGround _backGround;
+
+    public void SetBackGround(GameBackGround back)
+    {
+        _backGround = back;
+    }
+    public void BackGroundChange(string spriteName)
+    {
+
+        Managers.Resource.Load<Sprite>(spriteName, (success) =>
+        {
+            _backGround.SetBackGround(success);
+        });
+        
+    }
+    
+
+    #endregion
+
+
 }
