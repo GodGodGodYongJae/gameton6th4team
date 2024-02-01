@@ -1,181 +1,151 @@
 {
   "TriggerDatas": [
     {
-      "id": 1,
+      "id": 9,
       "ConditionList": [
         {
           "type": "DayCondition",
           "startDay": 1,
-          "endDay": 1
+          "endDay": 4
         }
       ],
       "ActionList": [
         {
-          "type" : "SetBackGroundAction",
-          "imageName" : "BackGround.sprite"
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "배가 침몰하기 전에 보트를 탔지만 보트가 찢어져 있는 줄은 몰랐어..\n다행이 보트도 가라앉기전에 섬이 보여서 섬으로 들어왔지\n근데 사람 사는 섬이 아닌거 같아 \n구조를 기다려야 겠지?"
-        },
-        {
-          "type": "SetActiveShowCharacterStatusAction",
-          "active": false
-        },
-        {
-          "type" : "AddItemAction",
-          "itemName" : "CanFood",
-          "amount" : 0
-        },
-        {
-          "type" : "AddItemAction",
-          "itemName" : "Water",
-          "amount" : 3
-        },
-        {
-          "type": "ShowYesOrNoAction",
-          "text" : "선택 예제  블라블라 블라블라",
-          "yesFlag": {
-            "name" : "TestFlag",
-            "value" : 1
+          "type": "SetRandomFlag",
+          "flag": {
+            "name" : "1-4DayRandomEventFlag",
+            "value": 0
           },
-          "noFlag": {
-            "name" : "TestFlag",
-            "value" : 2
-          }
+          "minValue" : 1,
+          "maxValue" : 2
         }
       ]
-
     },
     {
-      "id": 2,
-      "ConditionList": [
+      "id" : 10,
+      "ConditionList" : [
         {
-          "type": "DayCondition",
-          "startDay": 2,
-          "endDay": 2
-        }
-      ], 
-      "ActionList": [
-      {
-        "type": "ShowTextAction",
-        "text": "1일이 지났다."
-      },
-      {
-        "type": "SetActiveShowCharacterStatusAction",
-        "active": true
-      },
-        {
-          "type": "ShowYesOrNoAction",
-          "text" : "선택 예제  블라블라 블라블라",
-          "yesFlag": {
-            "name" : "TestFlag",
-            "value" : 1
-          },
-          "noFlag": {
-            "name" : "TestFlag",
-            "value" : 2
+          "type": "FlagCondition",
+          "flag": {
+            "name" : "1-4DayRandomEventFlag",
+            "value": 1
           }
-        }
-    ]
-
-    },
-    {
-      "id": 3,
-      "ConditionList": [
-        {
-          "type": "DayCondition",
-          "startDay": 3,
-          "endDay": 3
         }
       ],
-      "ActionList": [
-
-        {
-          "type": "ShowTextAction",
-          "text": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The quick brown fox jumps over the lazy dog."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Programming is the art of doing one thing at a time."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Life is really simple, but we insist on making it complicated."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "The only limit to our realization of tomorrow will be our doubts of today."
-        },
-        {
-          "type": "ShowTextAction",
-          "text": "Success is not final, failure is not fatal: It is the courage to continue that counts."
-        },
-        {
-          "type": "ShowItemChoiceAction",
-          "text": "목도 마르고 배도 고파 뭘 먹지?",
-          "itemFlagList": [
-            {
-              "itemName" : "CanFood",
-              "flag": {
-                "name": "EatFlag",
-                "value" : 1
-              }
-            },
-            {
-              "itemName" : "Water",
-              "flag": {
-                "name": "WaterFlag",
-                "value" : 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "SetFlag",
-          "flag" : {
-            "name" : "test",
-            "value" : 1
-          }
+      "ActionList": [{
+        "type" : "ShowTextAction",
+        "text": "소피아가 해변을 따라서 돌다가 해변에서 조금 떨어져 있는 암초에서 뭔가 발견했다고 우리한테 말했어\n괜히 위험한 행동은 안했으면 좋겠는데.."
+      },{
+        "type" : "SetFlag",
+        "flag": {
+          "name" : "1-4DayRandomEventFlag",
+          "value" : 0
         }
+      },{
+        "type": "ShowYesOrNoAction",
+        "text" : "가지러 가야 될까?",
+        "yesFlag": {
+          "name" : "HaveFlag",
+          "value" : 1
+        },
+        "noFlag": {
+          "name" : "HaveFlag",
+          "value" : 2
+        }
+      }
       ]
     },
     {
-      "id": 4,
+      "id": 11,
       "ConditionList": [
         {
           "type" : "FlagCondition",
           "flag": {
-              "name": "test",
-              "value" : 1
+            "name": "HaveFlag",
+            "value" : 1
           }
         }
       ],
       "ActionList" : [
         {
-        "type": "ShowTextAction",
-        "text" : "Flag Test 1!!"
+          "type": "ShowTextAction",
+          "text" : "암초에서 빛나던게 이거였나봐\n도움이 되겠는걸?"
         },
         {
           "type": "SetFlag",
           "flag": {
-            "name": "test",
+            "name": "HaveFlag",
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "ConditionList": [
+        {
+          "type" : "FlagCondition",
+          "flag": {
+            "name": "HaveFlag",
+            "value" : 2
+          }
+        }
+      ],
+      "ActionList" : [
+        {
+          "type": "ShowTextAction",
+          "text" : "어제 소피아가 발견한게 뭐였을까?\n궁금하긴 하지만 괜한 행동 안하는게 맞았을거야\n그 대신 다들 푹쉬어서 몸 상태가 좋은거 같아"
+        },
+        {
+          "type": "SetFlag",
+          "flag": {
+            "name": "HaveFlag",
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "id" : 13,
+      "ConditionList" : [
+        {
+          "type": "FlagCondition",
+          "flag": {
+            "name" : "1-4DayRandomEventFlag",
             "value": 2
           }
         }
+      ],
+      "ActionList": [{
+        "type" : "ShowTextAction",
+        "text": "사고로 겨우겨우 섬에 도착해서 그런지 다들 불안하고 초조해하고 있어\n일단 충분한 물을 섭취하고 마음을 진정시켜볼까?\n근데 언제 구조될지 모르는데 지금 물을 왕창 마셨다가 나중에 없으면 어떡하지?"
+      },{
+        "type" : "SetFlag",
+        "flag": {
+          "name" : "1-4DayRandomEventFlag",
+          "value" : 0
+        }
+      },{
+        "type": "ShowYesOrNoAction",
+        "text" : "물을 마실까?",
+        "yesFlag": {
+          "name" : "DrinkFlag",
+          "value" : 1
+        },
+        "noFlag": {
+          "name" : "DrinkFlag",
+          "value" : 2
+        }
+      }
       ]
     },
     {
-      "id": 5,
+      "id": 14,
       "ConditionList": [
         {
           "type" : "FlagCondition",
           "flag": {
-            "name": "TestFlag",
+            "name": "DrinkFlag",
             "value" : 1
           }
         }
@@ -183,24 +153,24 @@
       "ActionList" : [
         {
           "type": "ShowTextAction",
-          "text" : "당신은 Yes를 선택했었다."
+          "text" : "충분히 휴식한거 같아!\n당분간은 모두 건강 상태를 유지하겠지?"
         },
         {
           "type": "SetFlag",
           "flag": {
-            "name": "TestFlag",
+            "name": "DrinkFlag",
             "value": 0
           }
         }
       ]
     },
     {
-      "id": 6,
+      "id": 15,
       "ConditionList": [
         {
           "type" : "FlagCondition",
           "flag": {
-            "name": "TestFlag",
+            "name": "DrinkFlag",
             "value" : 2
           }
         }
@@ -208,66 +178,41 @@
       "ActionList" : [
         {
           "type": "ShowTextAction",
-          "text" : "당신은 No를 선택했었다."
+          "text" : "우리가 너무 안일했나봐\n심적으로 다들 지친 상태라 다들 갈증을 호소하고 있어..\n이러다가 다 죽을지도 몰라\n어서 물을 마셔야해.."
         },
         {
           "type": "SetFlag",
           "flag": {
-            "name": "TestFlag",
+            "name": "HaveFlag",
             "value": 0
           }
         }
       ]
     },
     {
-      "id": 7,
-      "ConditionList": [
+      "id" : 16,
+      "ConditionList" : [
         {
-          "type" : "FlagCondition",
+          "type": "FlagCondition",
           "flag": {
-            "name": "EatFlag",
-            "value" : 1
+            "name" : "1-4DayRandomEventFlag",
+            "value": 3
           }
         }
       ],
-      "ActionList" : [
+      "ActionList": [
         {
-          "type": "ShowTextAction",
-          "text" : "당신은 음식을 선택했다."
-        },
-        {
-          "type": "SetFlag",
-          "flag": {
-            "name": "EatFlag",
-            "value": 0
-          }
+        "type" : "ShowTextAction",
+        "text": "하염없이 구조만 기다려야할까?\n아니면 섬 내부로 이동해서 뭔가를 찾아봐야 할까?\n이 섬이 무인도가 아닐수도 있잖아?\n내부로 이동해야 한다면 들어가기 전에 배를 든든히 채우고 이동해야겠지?"
+      }
+      ,{
+        "type" : "SetFlag",
+        "flag": {
+          "name" : "1-4DayRandomEventFlag",
+          "value" : 0
         }
-      ]
-    },
-    {
-      "id": 8,
-      "ConditionList": [
-        {
-          "type" : "FlagCondition",
-          "flag": {
-            "name": "WaterFlag",
-            "value" : 1
-          }
-        }
-      ],
-      "ActionList" : [
-        {
-          "type": "ShowTextAction",
-          "text" : "당신은 물을 선택했다."
-        },
-        {
-          "type": "SetFlag",
-          "flag": {
-            "name": "WaterFlag",
-            "value": 0
-          }
-        }
+      }
       ]
     }
-  ]
-}
+    ]
+  }

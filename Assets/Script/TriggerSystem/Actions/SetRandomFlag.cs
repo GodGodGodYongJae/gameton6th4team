@@ -11,7 +11,7 @@ namespace Script.TriggerSystem.Actions
 
         public override void RunAction()
         {
-            flag.value = Random.Range(minValue, maxValue);
+            flag.value = Random.Range(minValue, maxValue+1);
             Managers.Game.SetFlag(flag);
         }
     }
