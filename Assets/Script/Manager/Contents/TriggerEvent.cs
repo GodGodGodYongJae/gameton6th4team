@@ -20,8 +20,8 @@
             //다시 한번 조건을 체크 함.
             foreach (var trigger in selectedTriggerDatas)
             {
-                if (!trigger.ConditionList.All(condition => condition.CheckCondition())) 
-                    continue;
+                // if (!trigger.ConditionList.All(condition => condition.CheckCondition())) 
+                //     continue;
                 foreach (var triggerAction in trigger.ActionList)
                 {
                     triggerAction.RunAction();

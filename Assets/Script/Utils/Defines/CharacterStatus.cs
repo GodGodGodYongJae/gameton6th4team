@@ -3,7 +3,12 @@
     public enum CharacterStatus
     {
         Hungry,
-        Thirsty
+        Thirsty,
+        Panic,
+        Tiredness,
+        Cold,
+        Addiction,
+        Wound
     }
 
     public enum SetStatusAction

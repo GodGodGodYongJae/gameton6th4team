@@ -15,13 +15,11 @@ namespace Script.Manager.Core
 
     public class DataManager
     {
-        public Dictionary<int, TextData> TextDatas = new Dictionary<int, TextData>();
         public Dictionary<int, TriggerData> TriggerDatas = new Dictionary<int, TriggerData>();
         public Dictionary<int, CharacterStatusData> CharacterStatusDatas = new Dictionary<int, CharacterStatusData>();
 
         public void Init()
         {
-            TextDatas = LoadJson<TextDataLoader, int, TextData>("textData").MakeDict();
             TriggerDatas = LoadJson<TriggerDataLoader, int, TriggerData>("triggerData").MakeDict();
             CharacterStatusDatas = LoadJson<CharacterStatusDataLoader, int, CharacterStatusData>("characterStatusData")
                 .MakeDict();

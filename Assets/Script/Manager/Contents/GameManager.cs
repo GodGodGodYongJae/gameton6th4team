@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Script.Manager.Contents;
+using Script.Scene.Game;
+using Script.TriggerSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class GameManager
 {
@@ -16,16 +20,41 @@ public class GameManager
         return _inventory.GetItemList.Values.ToList();
     }
 
-    public void AddItem(Item item,int amount = 0)
+    public Item GetFindByItemName(string name)
     {
-        if (item as ICountableItem != null)
+        return _inventory.FindByItemName(name);
+    }
+
+    public void AddItem(Item item,float amount = 0)
+    {
+        
+        _inventory.AddCountableItem(item,amount);
+
+    }
+
+    public void AddItem(string itemName, float amount = 0)
+    {
+        Managers.Resource.Load<Item>(itemName, (success) =>
         {
-            _inventory.AddCountableItem(item,amount);
-        }
-        else
-        {
-            _inventory.AddItem(item);
-        }
+            _inventory.AddCountableItem(success,amount);
+        });
+    }
+
+    public void UseItem(Item item, Character character, float amount = 0)
+    {
+       
+            _inventory.UseCountableItem(item,amount,character);
+    }
+    
+    
+    public bool CheckHaveItem(string itemName, int amount)
+    {
+
+        var item = GetFindByItemName(itemName);
+        if(item == null)
+            return false;
+
+        return item.GetAmount() >= amount;
     }
 
     #endregion
@@ -37,8 +66,6 @@ public class GameManager
 
     public void NextDay()
     {
-
-        
         if (_triggerEvent == null)
         {
             GameObject triggerEventObject = new GameObject();
@@ -47,6 +74,7 @@ public class GameManager
         //ShowCharacterStatus.
       
         CurrentDay++;
+        FadeInOut();
         _triggerEvent.StartTrigger(()=>
         {
             if (_activeShowStatus)
@@ -101,7 +129,7 @@ public class GameManager
         foreach (var character in Characters)
         {
             character.StatusText.Clear();
-            character.DisplaySatus.Clear();
+            character.DisplayStatusText.Clear();
         }
     }
     private void ShowCharacterText()
@@ -138,7 +166,7 @@ public class GameManager
                 if (Utils.InRange(character.GetStatusValue(checkStatus),checkMinValue,checkMaxValue) )
                 {
                     character.StatusText.Add(character.GetName() + noteText);
-                    character.DisplaySatus.Add(displayText);
+                    character.DisplayStatusText.Add(displayText);
                     
                 }
              
@@ -191,5 +219,106 @@ public class GameManager
                 break;
         }
         SelectCharacter.SetStatusValue(status,calculateValue);
+        SelectCharacter = null;
     }
+
+    public void RandomCharacterStatusCalculate(Define.CharacterStatus status, Define.SetStatusAction calculate, float value)
+    {
+        Character character = Characters[Random.Range(0, Characters.Count - 1)];
+        float calculateValue = character.GetStatusValue(status);
+        switch (calculate)
+        {
+            case Define.SetStatusAction.Add:
+                calculateValue += value;
+                break;
+            case Define.SetStatusAction.Mod:
+                calculateValue = value;
+                break;
+            case Define.SetStatusAction.Sub:
+                calculateValue -= value;
+                break;
+        }
+
+        character.SetStatusValue(status, calculateValue);
+        
+    }
+
+    #region Flag
+
+    public List<Flag> FlagList { get; private set; } = new List<Flag>();
+    public bool CheckFlag(Flag flag)
+    {
+        Flag findFlag = FlagList.Find(f => f.name == flag.name);
+        if (findFlag == null)
+            return false;
+
+        return findFlag.value == flag.value;
+    }
+    
+    public void SetFlag(Flag flag)
+    {
+        Flag findFlag = FlagList.Find(f => f.name == flag.name);
+        if (findFlag == null)
+        {
+            FlagList.Add(flag);
+        }
+        else
+        {
+            findFlag.value = flag.value;
+        }
+        
+    }
+    
+    public void ShowYesOrNoAction(string text, Flag yesFlag, Flag noFlag)
+    {
+        _book.AddYesOrNoBox(text,yesFlag,noFlag);
+    }
+
+    #endregion
+
+
+
+    public void ShowItemChoice(string text, List<ItemFlag> itemFlagList)
+    {
+        _book.AddItemChoiceBox(text, itemFlagList);
+    }
+
+    #region FadeInOut
+
+    private UI_Fade _fadeUI;
+
+    public void SetFadeUI(UI_Fade fade)
+    { 
+        _fadeUI = fade;
+    }
+    private void FadeInOut(float duration = 1.0f)
+    {
+        _fadeUI.FadeIn(CurrentDay,duration);
+    }
+
+    #endregion
+
+
+    #region InGameSprite
+
+    private GameBackGround _backGround;
+
+    public void SetBackGround(GameBackGround back)
+    {
+        _backGround = back;
+    }
+    public void BackGroundChange(string spriteName)
+    {
+
+        Managers.Resource.Load<Sprite>(spriteName, (success) =>
+        {
+            _backGround.SetBackGround(success);
+        });
+        
+    }
+    
+
+    #endregion
+
+
 }

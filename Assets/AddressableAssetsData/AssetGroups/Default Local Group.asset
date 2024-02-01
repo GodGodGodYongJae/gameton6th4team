@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-  - m_GUID: ef5de5840ee33134b9f64d4a8b385191
-    m_Address: textData
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
   - m_GUID: 6e39f84c80f351a4caed4bf4ce849232
     m_Address: triggerData
     m_ReadOnly: 0
@@ -49,6 +44,51 @@ MonoBehaviour:
     - PreLoad
   - m_GUID: 96a529138cc54683a76b61af29d321ed
     m_Address: characterStatusData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: ad5f603f0d79aeb43b5be869f9c55457
+    m_Address: FoodBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 0fd48fd372904a24aba2703e1db444b2
+    m_Address: FoodSelector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 6d09df563a99f57448d34d29dbba5773
+    m_Address: CanFood
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 79359d6c2d7a82444870b6d6f560ed36
+    m_Address: Water
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: c4254db4dce2e2c4bb40685970550b2c
+    m_Address: YesOrNoBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 81c367d9303a519489a26258784fadd2
+    m_Address: ItemChoiceBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: af0252530403d3c4ab03ef954f844f94
+    m_Address: ItemBox
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 1efb21ecc3e676c418306d8fed3065e7
+    m_Address: GreenGem.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+  - m_GUID: 9addd0bf2cfc82849bac6aff028deac4
+    m_Address: BackGround.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
