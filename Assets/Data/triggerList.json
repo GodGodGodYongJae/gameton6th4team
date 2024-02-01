@@ -31,6 +31,18 @@
           "type" : "AddItemAction",
           "itemName" : "Water",
           "amount" : 3
+        },
+        {
+          "type": "ShowYesOrNoAction",
+          "text" : "선택 예제  블라블라 블라블라",
+          "yesFlag": {
+            "name" : "TestFlag",
+            "value" : 1
+          },
+          "noFlag": {
+            "name" : "TestFlag",
+            "value" : 2
+          }
         }
       ]
 
