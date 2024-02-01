@@ -94,7 +94,6 @@ public class Book : MonoBehaviour
                     currentSelector.ShowCurrentDay();
                    
                     int result = _maxPageCount - 2 * reversedIndex - (_maxPageCount >= 2 && _maxPageCount % 2 == 0 ? 1 : 0);
-                    Debug.Log($"{result} Show Page");
                     ShowSelector(currentSelector.gameObject, result); // 역순으로 계산
                 }
                 
