@@ -254,6 +254,7 @@ public class GameManager
 
         return findFlag.value == flag.value;
     }
+    
     public void SetFlag(Flag flag)
     {
         Flag findFlag = FlagList.Find(f => f.name == flag.name);
